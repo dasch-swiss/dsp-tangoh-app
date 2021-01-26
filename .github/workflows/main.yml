@@ -1,0 +1,186 @@
+name: CI
+
+on:
+  push:
+  release:
+    types: [published]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - uses: joschi/setup-jdk@v2
+        with:
+          java-version: '11' # The OpenJDK version to make available on the path
+          architecture: 'x64' # defaults to 'x64'
+      - name: install requirements
+        run: sudo apt-get install ca-certificates-java expect
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - name: Install dependencies
+        run: |
+          npm install --global @bazel/bazelisk
+      - name: cache maven artifacts
+        uses: actions/cache@v1
+        with:
+          path: ~/.ivy2
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/KnoraBuild.sbt') }}
+          restore-keys: |
+            ${{ runner.OS }}-build-${{ env.cache-name }}-
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
+      - name: Run build everything
+        run: make test
+
+  docs:
+    name: Docs Build Test
+    needs: compile
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r docs/requirements.txt
+          npm install --global typedoc
+          npm install --global @bazel/bazelisk
+          sudo apt-get install graphviz
+      - name: Disk Free
+        run: |
+          df -h
+          docker system df
+          docker system prune --all --force --volumes
+          df -h
+      - name: run docs build
+        run: make docs-build
+      - name: Disk Free After
+        run: |
+          df -h
+          docker system df
+
+  release-please:
+    name: Prepare next release
+    runs-on: ubuntu-latest
+    # Automate releases with Conventional Commit Messages as Pull Requests are merged into "main" branch
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: GoogleCloudPlatform/release-please-action@v2
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          release-type: simple
+          package-name: dsp-tangoh-app
+          changelog-types: '[{"type": "feat","section": "Enhancements","hidden": false }, {"type": "fix","section": "Bug Fixes","hidden": false }, {"type": "chore","section": "Maintenance","hidden": false }, {"type": "docs","section": "Documentation","hidden": false }]'
+
+
+  # publish only on release
+  publish:
+    name: Publish (on release only)
+    needs: [
+      test,
+      docs-build-test
+    ]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release' && startsWith(github.ref, 'refs/tags')
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 50
+      - uses: joschi/setup-jdk@v2
+        with:
+          java-version: '11' # The OpenJDK version to make available on the path
+          architecture: 'x64' # defaults to 'x64'
+      - name: Install requirements
+        run: sudo apt-get install ca-certificates-java expect redis-tools unzip
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r docs/requirements.txt
+          npm install --global @bazel/bazelisk
+      - name: Cache maven artifacts
+        uses: actions/cache@v1
+        with:
+          path: ~/.ivy2
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/KnoraBuild.sbt') }}
+          restore-keys: |
+            ${{ runner.OS }}-build-${{ env.cache-name }}-
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
+      - name: Build and publish all images to Dockerhub
+        run: |
+          echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
+          make docker-publish
+
+  # google chat notification about release
+  notification:
+    name: Google chat notification about release and published version
+    needs: [publish]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release' && startsWith(github.ref, 'refs/tags')
+    steps:
+      - name: Send notification to google chat room "DSP releases"
+        uses: lakto/google-chat-action@main
+        with:
+          url: ${{ secrets.GOOGLE_CHAT_DSP_RELEASES_WEBHOOK_URL }}
+
+  # deploy documentation only on release
+  deploy-docs:
+    name: Deploy docs (on release only)
+    needs: [
+      docs-build-test
+    ]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release' && startsWith(github.ref, 'refs/tags')
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r docs/requirements.txt
+          npm install --global @bazel/bazelisk
+      - name: Deploy docs
+        uses: mhausenblas/mkdocs-deploy-gh-pages@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Disk Free After
+        run: |
+          df -h
+          docker system df
