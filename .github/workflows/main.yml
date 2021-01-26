@@ -44,7 +44,6 @@ jobs:
 
   docs:
     name: Docs Build Test
-    needs: compile
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -97,7 +96,7 @@ jobs:
     name: Publish (on release only)
     needs: [
       test,
-      docs-build-test
+      docs
     ]
     runs-on: ubuntu-latest
     if: github.event_name == 'release' && startsWith(github.ref, 'refs/tags')
@@ -154,7 +153,7 @@ jobs:
   deploy-docs:
     name: Deploy docs (on release only)
     needs: [
-      docs-build-test
+      docs
     ]
     runs-on: ubuntu-latest
     if: github.event_name == 'release' && startsWith(github.ref, 'refs/tags')
