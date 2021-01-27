@@ -4,15 +4,16 @@ load("@io_bazel_rules_docker//container:container.bzl", "container_image", "cont
 
 # builds the docker image
 container_image(
-    name = "image",
+    name = "docker",
     base = "@openjdk11//image",
-    cmd = ["java", "-jar", "/salsah1/salsah1_deploy.jar"],
-    # entrypoint = ["java", "-jar", "webapi_deploy.jar"],
+    cmd = ["java", "-jar", "/app/app_deploy.jar"],
+    legacy_run_behavior = False,
+    docker_run_flags = "-e KNORA_SALSAH1_HOSTNAME=0.0.0.0 -e KNORA_SALSAH1_PORT=3335 -e KNORA_SALSAH1_WEBAPI=http://0.0.0.0:3333 -e KNORA_SALSAH1_SIPI=http://0.0.0.0:1024",
     env = {
         "LANG": "en_US.UTF-8",
         "JAVA_OPTS": "-Dsun.jnu.encoding=UTF-8 -Dfile.encoding=UTF-8 -Dconfig.file=salsah.conf",
         "KNORA_SALSAH1_DEPLOYED": "true",
-        "KNORA_SALSAH1_WORKDIR": "/salsah1"
+        "KNORA_SALSAH1_WORKDIR": "/app"
     },
     directory = "app",
     files = [

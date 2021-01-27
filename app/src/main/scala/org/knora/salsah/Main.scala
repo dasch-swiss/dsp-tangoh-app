@@ -35,7 +35,7 @@ import scala.concurrent.Future
 import scala.io.Source
 
 object Main extends App {
-  implicit val system = ActorSystem("salsah-system")
+  implicit val system = ActorSystem("app-system")
   implicit val materializer = Materializer.matFromSystem(system)
   implicit val ec = system.dispatcher
 
@@ -97,7 +97,7 @@ object Main extends App {
 
     val publicDir = if (wherami.contains("bazel")) {
       // started through bazel
-      wherami + "/salsah1/public"
+      wherami + "/app/public"
     } else {
       // started through sbt
       wherami + "/public"
@@ -109,7 +109,7 @@ object Main extends App {
 
   val (host, port) = (settings.hostName, settings.httpPort)
 
-  log.info(s"Salsah online at http://$host:$port/index.html")
+  log.info(s"Tangoh online at http://$host:$port/index.html")
 
   val bindingFuture: Future[ServerBinding] = Http().bindAndHandle(handler, host, port)
 
