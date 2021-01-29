@@ -9,7 +9,7 @@ container_image(
     base = "@openjdk11//image",
     cmd = ["java", "-jar", "/app/app_deploy.jar"],
     legacy_run_behavior = False,
-    docker_run_flags = "--rm -e KNORA_SALSAH1_HOSTNAME=0.0.0.0 -e KNORA_SALSAH1_PORT=3335 -e KNORA_SALSAH1_WEBAPI=http://0.0.0.0:3333 -e KNORA_SALSAH1_SIPI=http://0.0.0.0:1024 -p 3335:3335",
+    docker_run_flags = "--rm -p 3336:3336",
     env = {
         "LANG": "en_US.UTF-8",
         "JAVA_OPTS": "-Dsun.jnu.encoding=UTF-8 -Dfile.encoding=UTF-8 -Dconfig.file=salsah.conf",
