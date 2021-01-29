@@ -38,13 +38,21 @@ docs-clean: ## cleans the project directory
 build: ## build all targets (excluding docs)
 	@bazel build //...
 
+.PHONY: run
+run: ## run app
+	@bazel run //app
+
 #################################
 # Docker targets
 #################################
 
+.PHONY: docker-run
+docker-run: ## run Tangoh docker image locally
+	@bazel run //docker
+
 .PHONY: docker-build
 docker-build: ## build and publish Tangoh docker image locally
-	@bazel run //docker:image
+	@bazel run //docker -- --norun
 
 .PHONY: docker-publish
 docker-publish: ## publish Tangoh image to Dockerhub

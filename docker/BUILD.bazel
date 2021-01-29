@@ -1,6 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
 load("@io_bazel_rules_docker//container:container.bzl", "container_image", "container_push")
+load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 
 # builds the docker image
 container_image(
@@ -8,12 +9,10 @@ container_image(
     base = "@openjdk11//image",
     cmd = ["java", "-jar", "/app/app_deploy.jar"],
     legacy_run_behavior = False,
-    docker_run_flags = "-e KNORA_SALSAH1_HOSTNAME=0.0.0.0 -e KNORA_SALSAH1_PORT=3335 -e KNORA_SALSAH1_WEBAPI=http://0.0.0.0:3333 -e KNORA_SALSAH1_SIPI=http://0.0.0.0:1024",
+    docker_run_flags = "--rm -e KNORA_SALSAH1_HOSTNAME=0.0.0.0 -e KNORA_SALSAH1_PORT=3335 -e KNORA_SALSAH1_WEBAPI=http://0.0.0.0:3333 -e KNORA_SALSAH1_SIPI=http://0.0.0.0:1024 -p 3335:3335",
     env = {
         "LANG": "en_US.UTF-8",
         "JAVA_OPTS": "-Dsun.jnu.encoding=UTF-8 -Dfile.encoding=UTF-8 -Dconfig.file=salsah.conf",
-        "KNORA_SALSAH1_DEPLOYED": "true",
-        "KNORA_SALSAH1_WORKDIR": "/app"
     },
     directory = "app",
     files = [
@@ -33,7 +32,7 @@ container_image(
 # push to dockerhub
 container_push(
    name = "push",
-   image = ":image",
+   image = ":docker",
    format = "Docker",
    registry = "index.docker.io",
    repository = "daschswiss/knora-salsah1",
@@ -47,3 +46,12 @@ container_push(
 #  cmd = "docker load -i $(location //docker/knora-salsah1:image) >$@",
 #  outs = ["build-output.txt"]
 #)
+
+
+# for documentation of yaml, please see https://github.com/GoogleContainerTools/container-structure-test
+container_test(
+    name = "image_test",
+    configs = ["test_app_image_config.yaml"],
+    image = ":docker",
+    size="small"
+)

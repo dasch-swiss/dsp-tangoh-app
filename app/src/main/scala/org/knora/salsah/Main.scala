@@ -19,8 +19,8 @@
 
 package org.knora.salsah
 
-import java.io.{File, PrintWriter}
-import java.nio.file.{Path, Paths}
+import java.io.{ File, PrintWriter }
+import java.nio.file.{ Path, Paths }
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
@@ -31,91 +31,73 @@ import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.server.directives.ContentTypeResolver.Default
 import akka.stream.Materializer
 
-import scala.concurrent.Future
+import scala.concurrent.{ ExecutionContextExecutor, Future }
 import scala.io.Source
 
 object Main extends App {
-  implicit val system = ActorSystem("app-system")
-  implicit val materializer = Materializer.matFromSystem(system)
-  implicit val ec = system.dispatcher
+  implicit val system: ActorSystem = ActorSystem("app-system")
+  implicit val materializer: Materializer = Materializer.matFromSystem(system)
+  implicit val ec: ExecutionContextExecutor = system.dispatcher
 
   /**
-    * The application's configuration.
-    */
+   * The application's configuration.
+   */
   val settings: SettingsImpl = Settings(system)
 
   val log = akka.event.Logging(system, this.getClass)
 
-  log.info(s"Deployed: ${settings.deployed}")
+  val wherami = System.getProperty("user.dir")
+  println(s"user.dir: $wherami")
 
-  val handler = if (settings.deployed) {
-    // deployed state
-    val workdir = settings.workingDirectory
-    log.info(s"Working Directory: $workdir")
-    val publicDir = workdir + "/public"
-    log.info(s"Public Directory: $publicDir")
-
-    val webapiUrl = settings.webapiUrl
-    log.info("webapiUrl: {}", webapiUrl)
-
-    val sipiUrl = settings.sipiUrl
-    log.info("sipiUrl: {}", sipiUrl)
-
-    //create /tmp directory if it does not exist
-    val tmpDir = new File("/tmp")
-    if (!tmpDir.exists()) {
-      tmpDir.mkdir()
-    }
-
-    /* rewriting webapi and sipi url in public/js/00_init_javascript.js */
-    val originalFile = new File(s"$publicDir/js/00_init_javascript.js") // Original File
-    val tempFile = new File("/tmp/00_init_javascript.js") // Temporary File
-    val printWriter = new PrintWriter(tempFile)
-
-    val origSource = Source.fromFile(originalFile)("UTF-8")
-    origSource.getLines
-      .map { line =>
-        if (line.contains("http://0.0.0.0:3333")) {
-          s"var API_URL = '$webapiUrl';"
-        } else if (line.contains("http://0.0.0.0:1024")) {
-          s"var SIPI_URL = '$sipiUrl';"
-        } else {
-          line.toString
-        }
-      }
-      .foreach(x => printWriter.println(x))
-
-    origSource.close()
-    printWriter.close()
-    tempFile.renameTo(originalFile)
-
-    serveFromPublicDir(publicDir)
+  val publicDir = if (wherami.contains("bazel")) {
+    wherami + "/app/public"
   } else {
-    // undeployed state (default when run from sbt or from bazel)
-    val wherami = System.getProperty("user.dir")
-    log.info(s"user.dir: $wherami")
-
-    val publicDir = if (wherami.contains("bazel")) {
-      // started through bazel
-      wherami + "/app/public"
-    } else {
-      // started through sbt
-      wherami + "/public"
-    }
-    log.info(s"serving files from: $publicDir")
-
-    serveFromPublicDir(publicDir)
+    "/app/public"
   }
+  println(s"Public Directory: $publicDir")
+
+  val webapiUrl = settings.webapiUrl
+  println(s"webapiUrl: $webapiUrl")
+
+  val sipiUrl = settings.sipiUrl
+  println(s"sipiUrl: $sipiUrl")
+
+  //create /tmp directory if it does not exist
+  val tmpDir = new File("./tmp")
+  if (!tmpDir.exists()) {
+    tmpDir.mkdir()
+  }
+
+  /* rewriting webapi and sipi url in public/js/00_init_javascript.js */
+  val originalFile = new File(s"$publicDir/js/00_init_javascript.js") // Original File
+  val tempFile = new File("./tmp/00_init_javascript.js") // Temporary File
+  val printWriter = new PrintWriter(tempFile)
+
+  val origSource = Source.fromFile(originalFile)("UTF-8")
+  origSource.getLines
+    .map { line =>
+      if (line.contains("http://0.0.0.0:3333")) {
+        s"var API_URL = '$webapiUrl';"
+      } else if (line.contains("http://0.0.0.0:1024")) {
+        s"var SIPI_URL = '$sipiUrl';"
+      } else {
+        line
+      }
+    }
+    .foreach(x => printWriter.println(x))
+
+  origSource.close()
+  printWriter.close()
+  tempFile.renameTo(originalFile)
 
   val (host, port) = (settings.hostName, settings.httpPort)
 
-  log.info(s"Tangoh online at http://$host:$port/index.html")
+  val bindingFuture: Future[ServerBinding] = Http().newServerAt(host, port).bind(serveFromPublicDir(publicDir))
 
-  val bindingFuture: Future[ServerBinding] = Http().bindAndHandle(handler, host, port)
+  println(s"Server online at http://$host:$port/index.html")
 
-  bindingFuture onFailure {
-    case ex: Exception =>
-      log.error(ex, s"Failed to bind to $host:$port")
+  bindingFuture.failed.foreach { ex =>
+    log.error(ex, s"Failed to bind to $host:$port")
   }
 
   private def serveFromPublicDir(publicDir: String): Route = get {
@@ -126,6 +108,7 @@ object Main extends App {
         case _   => Paths.get(publicDir + requestData.uri.path.toString)
       }
 
+      println(s"${requestData.method} ${requestData.uri} ${requestData.uri.path}")
       getFromFile(fullPath.toString)
     }
   }

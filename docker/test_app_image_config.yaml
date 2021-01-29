@@ -1,0 +1,19 @@
+schemaVersion: 2.0.0
+
+metadataTest:
+  cmd: [
+      'java', '-jar', "/app/app_deploy.jar",
+  ]
+
+fileExistenceTests:
+  - name: 'app.jar'
+    path: '/app/app_deploy.jar'
+    shouldExist: true
+
+  - name: '00_init_javascript.js'
+    path: '/app/public/js/00_init_javascript.js'
+    shouldExist: true
+
+  - name: 'index.html'
+    path: '/app/public/index.html'
+    shouldExist: true

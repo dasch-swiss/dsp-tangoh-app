@@ -19,27 +19,23 @@
 
 package org.knora.salsah
 
-import akka.actor.{ActorSystem, ExtendedActorSystem, Extension, ExtensionId, ExtensionIdProvider}
+import akka.actor.{ ActorSystem, ExtendedActorSystem, Extension, ExtensionId, ExtensionIdProvider }
 import com.typesafe.config.Config
 
 /**
-  * Reads application settings that come from `application.conf`.
-  */
+ * Reads application settings that come from `application.conf`.
+ */
 class SettingsImpl(config: Config) extends Extension {
 
-  val hostName = config.getString("app.http.hostname")
-  val httpPort = config.getInt("app.http.port")
+  val hostName: String = config.getString("app.http.hostname")
+  val httpPort: Int = config.getInt("app.http.port")
 
   // used for testing
-  val headless = config.getBoolean("app.testing.headless")
-
-  // used in deployment
-  val deployed = config.getBoolean("app.deployed")
-  val workingDirectory = config.getString("app.workdir")
+  val headless: Boolean = config.getBoolean("app.testing.headless")
 
   // Javascript Configuration
-  val webapiUrl = config.getString("app.jsconf.external-webapi-url")
-  val sipiUrl = config.getString("app.jsconf.external-sipi-url")
+  val webapiUrl: String = config.getString("app.jsconf.external-webapi-url")
+  val sipiUrl: String = config.getString("app.jsconf.external-sipi-url")
 }
 
 object Settings extends ExtensionId[SettingsImpl] with ExtensionIdProvider {
@@ -50,7 +46,7 @@ object Settings extends ExtensionId[SettingsImpl] with ExtensionIdProvider {
     new SettingsImpl(system.settings.config)
 
   /**
-    * Java API: retrieve the Settings extension for the given system.
-    */
+   * Java API: retrieve the Settings extension for the given system.
+   */
   override def get(system: ActorSystem): SettingsImpl = super.get(system)
 }
