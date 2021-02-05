@@ -350,8 +350,12 @@
 			// user is not logged in,
 			// get all projects
 			SALSAH.ApiGet('projects', function(data) {
-				for (var p in data.projects) {
-					selele.append($('<option>').attr({title: data.projects[p].longname}).val(data.projects[p].id).text(data.projects[p].shortname));
+				if (data.status == ApiErrors.OK) {
+					for (var p in data.projects) {
+						selele.append($('<option>').attr({title: data.projects[p].longname}).val(data.projects[p].id).text(data.projects[p].shortname));
+					}
+				} else {
+					alert(data.errormsg);
 				}
 			});
 		}
