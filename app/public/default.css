@@ -36,7 +36,8 @@
  * body definitions
  */
 body {
-  background-image: url("less/images/main/background.gif");
+  /* background-image: url("less/images/main/background.gif"); */
+  background-color: whitesmoke;
   background-position: center;
   background-repeat: repeat-y;
   /* just a test for dokubib!! */
@@ -326,8 +327,8 @@ body {
 }
 .workwin_logo {
   position: absolute;
-  background: url("less/images/workwin/logo-salsah.png");
-  background-color: transparent;
+  background: url("less/images/workwin/dsp-vre-logo-black.png") no-repeat;
+  background-size: 150px 38px;
   width: 154px;
   height: 40px;
   top: 0px;
