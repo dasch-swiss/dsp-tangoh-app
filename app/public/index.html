@@ -330,15 +330,14 @@
 				extended_search();
 			})
 		);
-		
 
+		var selele;
+		$('#searchlimsel')
+		.empty()
+		.append(s_('_limitsearch'))
+		.append(selele = $('<select>').attr({id: 'limitproject', title: 'limit search to project'}));
+		selele.append($('<option>').attr({title: 'ALl'}).val(-1).text('-'));
 		if (SALSAH.userprofile.projects_info) {
-			var selele;
-			$('#searchlimsel')
-			.empty()
-			.append(s_('_limitsearch'))
-			.append(selele = $('<select>').attr({id: 'limitproject', title: 'limit search to project'}));
-			selele.append($('<option>').attr({title: 'ALl'}).val(-1).text('-'));
 			for (var p in SALSAH.userprofile.projects_info) {
 				if (p == SALSAH.userprofile.active_project) {
 					selele.append($('<option>').attr({title: SALSAH.userprofile.projects_info[p].longname, selected: true}).val(p).text(SALSAH.userprofile.projects_info[p].shortname));
@@ -347,9 +346,18 @@
 					selele.append($('<option>').attr({title: SALSAH.userprofile.projects_info[p].longname}).val(p).text(SALSAH.userprofile.projects_info[p].shortname));
 				}
 			}
+		} else {
+			// user is not logged in,
+			// get all projects
+			SALSAH.ApiGet('projects', function(data) {
+				for (var p in data.projects) {
+					selele.append($('<option>').attr({title: data.projects[p].longname}).val(data.projects[p].id).text(data.projects[p].shortname));
+				}
+			});
 		}
 
-	};
+
+	}
 	
 	$(function(){
 		if (SALSAH.userprofile === undefined) SALSAH.userprofile = {};
