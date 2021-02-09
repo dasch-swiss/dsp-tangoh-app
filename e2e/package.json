@@ -1,0 +1,22 @@
+{
+  "name": "test",
+  "version": "0.0.1",
+  "description": "E2E Tests for Tangoh",
+  "main": "index.js",
+  "scripts": {
+    "test": "testcafe chrome search.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dasch-swiss/dsp-tangoh-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dasch-swiss/dsp-tangoh-app/issues"
+  },
+  "homepage": "https://github.com/dasch-swiss/dsp-tangoh-app#readme",
+  "devDependencies": {
+    "testcafe": "^1.10.1"
+  }
+}
