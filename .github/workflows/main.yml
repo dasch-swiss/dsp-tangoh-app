@@ -54,8 +54,8 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - uses: actions/checkout@v1
-      #- name: prepare stack
-      #  run: make e2e-prepare
+      - name: prepare stack
+        run: make e2e-prepare
       - name: Run TestCafe Tests
         uses: DevExpress/testcafe-action@latest
         with:
