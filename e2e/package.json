@@ -4,7 +4,7 @@
   "description": "E2E Tests for Tangoh",
   "main": "index.js",
   "scripts": {
-    "test": "testcafe chrome search.ts"
+    "test": "testcafe chrome specs"
   },
   "repository": {
     "type": "git",
