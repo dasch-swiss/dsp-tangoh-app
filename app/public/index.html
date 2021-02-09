@@ -266,7 +266,9 @@
 						.simpledialog('loginbox', {'class': 'loginbox', width: 400, positioning: 'upper', focus: '#user_id'})
 					);
 					if (SALSAH.reset_project_selection !== undefined) SALSAH.reset_project_selection();
-					$('#searchlimsel').empty();
+					// user is not logged in,
+					// get all projects
+					limit_simple_search_get_all_projects();
 				}
 				else {
 					alert(data.errormsg);
@@ -349,18 +351,25 @@
 		} else {
 			// user is not logged in,
 			// get all projects
-			SALSAH.ApiGet('projects', function(data) {
-				if (data.status == ApiErrors.OK) {
-					for (var p in data.projects) {
-						selele.append($('<option>').attr({title: data.projects[p].longname}).val(data.projects[p].id).text(data.projects[p].shortname));
-					}
-				} else {
-					alert(data.errormsg);
-				}
-			});
+			limit_simple_search_get_all_projects();
 		}
 
 
+	}
+
+	/**
+	 * Gets all projects for selection in simple search field.
+	 */
+	function limit_simple_search_get_all_projects() {
+		SALSAH.ApiGet('projects', function(data) {
+			if (data.status == ApiErrors.OK) {
+				for (var p in data.projects) {
+					$('#searchlimsel select').append($('<option>').attr({title: data.projects[p].longname}).val(data.projects[p].id).text(data.projects[p].shortname));
+				}
+			} else {
+				alert(data.errormsg);
+			}
+		});
 	}
 	
 	$(function(){
