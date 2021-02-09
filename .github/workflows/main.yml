@@ -40,7 +40,7 @@ jobs:
             ${{ runner.OS }}-build-
             ${{ runner.OS }}-
       - name: Run build everything
-        run: make test
+        run: make build
 
   docs:
     name: Docs Build Test
@@ -56,7 +56,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v1
         with:
-          node-version: '12'
+          node-version: '14'
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -64,18 +64,9 @@ jobs:
           npm install --global typedoc
           npm install --global @bazel/bazelisk
           sudo apt-get install graphviz
-      - name: Disk Free
-        run: |
-          df -h
-          docker system df
-          docker system prune --all --force --volumes
-          df -h
       - name: run docs build
         run: make docs-build
-      - name: Disk Free After
-        run: |
-          df -h
-          docker system df
+
 
   release-please:
     name: Prepare next release
@@ -179,7 +170,3 @@ jobs:
         uses: mhausenblas/mkdocs-deploy-gh-pages@master
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-      - name: Disk Free After
-        run: |
-          df -h
-          docker system df

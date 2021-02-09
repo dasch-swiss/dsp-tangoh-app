@@ -9,7 +9,7 @@ container_image(
     base = "@openjdk11//image",
     cmd = ["java", "-jar", "/app/app_deploy.jar"],
     legacy_run_behavior = False,
-    docker_run_flags = "--rm -p 3336:3336",
+    docker_run_flags = "--rm -p 3335:3335",
     env = {
         "LANG": "en_US.UTF-8",
         "JAVA_OPTS": "-Dsun.jnu.encoding=UTF-8 -Dfile.encoding=UTF-8 -Dconfig.file=salsah.conf",
@@ -35,7 +35,7 @@ container_push(
    image = ":docker",
    format = "Docker",
    registry = "index.docker.io",
-   repository = "daschswiss/knora-salsah1",
+   repository = "daschswiss/dsp-tangoh-app",
    tag = "{BUILD_SCM_TAG}"
 )
 
