@@ -34,7 +34,7 @@ Cypress.Commands.add("login", (name: string, password: string) => {
     cy.get('#login_button').click();
 
     cy.get('#userctrl').should(($userInfo: JQuery<HTMLElement>) => {
-        expect($userInfo.get(0).innerText).to.eq('User : Anything User01');
+        expect($userInfo.get(0).innerText).to.contain('User : ');
     });
 });
 
