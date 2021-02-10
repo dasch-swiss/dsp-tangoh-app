@@ -1,7 +1,7 @@
 describe('Search', () => {
     it('perform a fulltext search', () => {
 
-        cy.visit('http://0.0.0.0:3335/index.html')
+        cy.visit('')
 
         cy.get('#simplesearch').type('Test\n');
 
