@@ -1,7 +1,7 @@
 describe('Search', () => {
     it('perform a fulltext search', () => {
 
-        cy.visit('')
+        cy.visit('');
 
         cy.get('#simplesearch').type('Test\n');
 
