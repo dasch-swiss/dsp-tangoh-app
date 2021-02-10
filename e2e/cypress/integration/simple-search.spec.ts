@@ -23,6 +23,8 @@ describe('Search', () => {
 
     it('limit fulltext search to a project (with login)', () => {
 
+        cy.intercept('GET', '/v1/search').as('search')
+
         cy.visit('');
 
         cy.login('anything.user01@example.org', 'test');
@@ -34,6 +36,16 @@ describe('Search', () => {
             expect(options.length).to.eq(2);
             expect(options[1].innerText).to.eq('anything');
         })
+
+        cy.get('#limitproject').select('anything');
+
+        cy.get('#simplesearch').type('Test\n');
+
+        cy.wait('@search')
+            .should((res: Interception) => {
+                expect(res.request.url).to.contain('filter_by_project=http%3A%2F%2Frdfh.ch%2Fprojects%2F0001')
+                expect(res.response?.body.nhits).to.eq('2');
+            })
 
         cy.logout();
 
