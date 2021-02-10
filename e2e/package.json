@@ -2,9 +2,8 @@
   "name": "e2e",
   "version": "0.0.0",
   "description": "E2E Tests for Tangoh",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cypress run --browser chrome"
   },
   "author": "",
   "license": "ISC",
