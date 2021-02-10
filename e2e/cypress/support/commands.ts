@@ -23,6 +23,8 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+// login
 Cypress.Commands.add("login", (name: string, password: string) => {
     cy.get('#dologin').click();
 
@@ -33,5 +35,16 @@ Cypress.Commands.add("login", (name: string, password: string) => {
 
     cy.get('#userctrl').should(($userInfo: JQuery<HTMLElement>) => {
         expect($userInfo.get(0).innerText).to.eq('User : Anything User01');
+    });
+});
+
+// logout
+Cypress.Commands.add("logout", () => {
+    cy.get('#dologout').click();
+
+    cy.get('#logout_button').click();
+
+    cy.get('#userctrl').should(($userInfo: JQuery<HTMLElement>) => {
+        expect($userInfo.get(0).innerText).to.eq('');
     });
 });
