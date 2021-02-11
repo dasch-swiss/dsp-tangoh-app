@@ -57,7 +57,7 @@ dependencies.txt
 /client-test-data.zip
 /db_staging_dump.trig
 
-e2e/node_modules
+node_modules
 e2e/cypress/plugins
 e2e/cypress/videos
 

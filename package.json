@@ -1,0 +1,22 @@
+{
+  "name": "e2e",
+  "version": "0.0.0",
+  "description": "E2E Tests for Tangoh",
+  "scripts": {
+    "test": "cypress run --browser chrome"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@bazel/bazelisk": "^1.7.3",
+    "@bazel/cypress": "^3.1.0",
+    "@bazel/ibazel": "^0.14.0",
+    "@bazel/typescript": "3.0.0",
+    "@types/express": "^4.17.11",
+    "@types/node": "^14.14.25",
+    "cypress": "^6.4.0",
+    "rxjs": "^6.5.2",
+    "express": "4.17.1",
+    "typescript": "^3.9.7"
+  }
+}

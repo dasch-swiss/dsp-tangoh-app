@@ -42,6 +42,10 @@ build: ## build all targets (excluding docs)
 run: ## run app
 	@bazel run //app
 
+.PHONY: yarn
+yarn: ## install dependencies
+	@bazel run @nodejs//:yarn
+
 #################################
 # Docker targets
 #################################
@@ -63,15 +67,15 @@ docker-publish: ## publish Tangoh image to Dockerhub
 #################################
 
 .PHONY: test-docker
-test-docker: docker-build ## runs Docker image tests
+test-docker: docker-build yarn ## runs Docker image tests
 	bazel test //docker/...
 
 .PHONY: test-app
-test-webapi: docker-build ## runs all app tests.
+test-webapi: docker-build yarn ## runs all app tests.
 	bazel test //app/...
 
 .PHONY: test
-test: docker-build ## runs all test targets.
+test: docker-build yarn ## runs all test targets.
 	bazel test //...
 
 #################################
