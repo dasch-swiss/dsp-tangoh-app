@@ -8,7 +8,7 @@ ts_library(
     name = "plugins_file",
     testonly = True,
     srcs = ["plugin.ts"],
-    tsconfig = ":tsconfig.json",
+    tsconfig = "//:tsconfig.json",
     deps = [
         "@npm//@types",
         "@npm//express",
@@ -20,7 +20,7 @@ ts_library(
     name = "hello_spec",
     testonly = True,
     srcs = ["hello.spec.ts"],
-    tsconfig = ":tsconfig.json",
+    tsconfig = "//:tsconfig.json",
     deps = [
         "@npm//cypress",
     ],
@@ -36,7 +36,7 @@ cypress_web_test(
         ":hello_spec",
     ],
     # A cypress config file is required
-    config_file = "cypress.json",
+    config_file = "//:cypress.json",
     # Any runtime dependencies you need to boot your server or run your tests
     data = ["@npm//rxjs"],
     # Your cypress plugin used to configure cypress and boot your server

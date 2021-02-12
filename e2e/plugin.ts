@@ -19,7 +19,7 @@
 
 import * as express from "express";
 
-module.exports = (on, config) => {
+module.exports = (on: any, config: any) => {
     const app = express();
 
     app.get('/', function(req:express.Request, res:express.Response) {
