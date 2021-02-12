@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "E2E Tests for Tangoh",
   "scripts": {
-    "test": "cypress run --browser chrome"
+    "test": "cypress run --config-file cypress.json --browser chrome"
   },
   "author": "",
   "license": "ISC",
