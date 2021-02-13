@@ -58,8 +58,3 @@ dependencies.txt
 /db_staging_dump.trig
 
 node_modules
-e2e/cypress/plugins
-e2e/cypress/videos
-e2e/cypress/fixtures
-cypress/*
-

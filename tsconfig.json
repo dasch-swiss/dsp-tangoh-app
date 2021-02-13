@@ -3,11 +3,9 @@
     "baseUrl": ".",
     "target": "es5",
     "lib": ["es5", "dom"],
-    "types": ["cypress"],
+    "types": ["cypress", "node"],
     "strict": true,
     "noEmitOnError": true
   },
-  "include": [
-    "**/*.ts"
-  ]
+  "exclude": ["bazel-*", "node_modules", "public/build/*"]
 }

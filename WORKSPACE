@@ -1,5 +1,5 @@
 workspace(
-    name = "io_dasch_dsp_api",
+    name = "io_dasch_dsp_tangoh_app",
     managed_directories = {"@npm": ["node_modules"]},
 )
 

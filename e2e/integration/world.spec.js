@@ -1,5 +1,5 @@
 /*
- * Copyright © 2015-2021 the contributors (see Contributors.md).
+ * Copyright © 2015-2018 the contributors (see Contributors.md).
  *
  *  This file is part of Knora.
  *
@@ -18,8 +18,8 @@
  */
 
 describe('world', () => {
-    it('should find world', () => {
-        cy.visit('http://localhost:3000');
-        cy.contains('world');
+    it('should find footer text', () => {
+        cy.visit('/');
+        cy.contains('DaSCH');
     });
 });

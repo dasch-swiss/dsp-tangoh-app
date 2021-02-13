@@ -1,5 +1,5 @@
 /*
- * Copyright © 2015-2021 the contributors (see Contributors.md).
+ * Copyright © 2015-2018 the contributors (see Contributors.md).
  *
  *  This file is part of Knora.
  *
@@ -17,19 +17,9 @@
  *  License along with Knora.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import * as express from "express";
-
-module.exports = (on: any, config: any) => {
-    const app = express();
-
-    app.get('/', function(req:express.Request, res:express.Response) {
-        res.send('<html><body>hello-world</body></html>');
+describe('hello', () => {
+    it('should find title text', () => {
+        cy.visit('/');
+        cy.get('title').contains('System');
     });
-
-    const port = 3335;
-    app.listen(port);
-
-    config.baseUrl = `http://0.0.0.0:${port}`;
-
-    return config;
-};
+});
