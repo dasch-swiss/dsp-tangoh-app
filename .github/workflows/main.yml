@@ -19,7 +19,7 @@ jobs:
           architecture: 'x64' # defaults to 'x64'
       - name: install requirements
         run: sudo apt-get install ca-certificates-java expect
-      - name: Set up Python 3.8
+      - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
@@ -39,8 +39,8 @@ jobs:
             ${{ runner.OS }}-build-${{ env.cache-name }}-
             ${{ runner.OS }}-build-
             ${{ runner.OS }}-
-      - name: Run build everything
-        run: make build
+      - name: Run tests
+        run: make test-e2e
 
   docs:
     name: Docs Build Test
@@ -80,7 +80,6 @@ jobs:
           release-type: simple
           package-name: dsp-tangoh-app
           changelog-types: '[{"type": "feat","section": "Enhancements","hidden": false }, {"type": "fix","section": "Bug Fixes","hidden": false }, {"type": "chore","section": "Maintenance","hidden": false }, {"type": "docs","section": "Documentation","hidden": false }]'
-
 
   # publish only on release
   publish:

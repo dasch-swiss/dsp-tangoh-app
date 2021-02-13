@@ -1,4 +1,7 @@
-workspace(name = "io_dasch_dsp_api")
+workspace(
+    name = "io_dasch_dsp_tangoh_app",
+    managed_directories = {"@npm": ["node_modules"]},
+)
 
 # load http_archive method
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file")
@@ -59,6 +62,39 @@ http_archive(
 load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 protobuf_deps()
 
+
+#
+# download rules_nodejs (javascript)
+#
+http_archive(
+    name = "build_bazel_rules_nodejs",
+    sha256 = "dd4dc46066e2ce034cba0c81aa3e862b27e8e8d95871f567359f7a534cccb666",
+    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/3.1.0/rules_nodejs-3.1.0.tar.gz"],
+)
+
+# NOTE: this rule installs nodejs, npm, and yarn, but does NOT install
+# your npm dependencies into your node_modules folder.
+# You must still run the package manager to do this.
+load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories")
+node_repositories(
+    node_version = "14.15.4",
+    package_json = ["//:package.json"],
+)
+
+load("@build_bazel_rules_nodejs//:package.bzl", "rules_nodejs_dev_dependencies")
+rules_nodejs_dev_dependencies()
+
+load("@build_bazel_rules_nodejs//:index.bzl", "yarn_install")
+yarn_install(
+  name = "npm",
+  package_json = "//:package.json",
+  yarn_lock = "//:yarn.lock",
+)
+
+load("@npm//@bazel/cypress:index.bzl", "cypress_repository")
+
+# The name you pass here names the external repository you can load cypress_web_test from
+cypress_repository(name = "cypress")
 
 #
 # download rules_webtesting (for browser tests of salsah1)
