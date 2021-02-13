@@ -42,6 +42,14 @@ build: ## build all targets (excluding docs)
 run: ## run app
 	@bazel run //app
 
+.PHONY: yarn
+yarn: ## install dependencies
+	@bazel run @nodejs//:yarn
+
+.PHONY: cypress-install
+cypress-install: yarn ## install dependencies
+	@bazel run @npm//cypress/cypress:bin -- install
+
 #################################
 # Docker targets
 #################################
@@ -59,19 +67,38 @@ docker-publish: ## publish Tangoh image to Dockerhub
 	@bazel run //docker:push
 
 #################################
+# Integration test targets
+#################################
+
+# Clones the knora-api git repository
+.PHONY: dsp-stack-clone
+dsp-stack-clone:
+	@git clone --branch main --single-branch --depth 1 https://github.com/dasch-swiss/dsp-api.git $(CURRENT_DIR)/.tmp/dsp-stack
+
+.PHONY: dsp-stack-run
+dsp-stack-run: dsp-stack-clone ## runs the dsp-stack
+	$(MAKE) -C $(CURRENT_DIR)/.tmp/dsp-stack init-db-test
+	$(MAKE) -C $(CURRENT_DIR)/.tmp/dsp-stack stack-up
+	$(MAKE) -C $(CURRENT_DIR)/.tmp/dsp-stack stack-logs-api-no-follow
+
+#################################
 ## Test Targets
 #################################
 
 .PHONY: test-docker
-test-docker: docker-build ## runs Docker image tests
+test-docker: yarn ## runs Docker image tests
 	bazel test //docker/...
 
 .PHONY: test-app
-test-webapi: docker-build ## runs all app tests.
-	bazel test //app/...
+test-app: yarn ## runs all app tests (requires a running dsp-stack).
+	bazel test //e2e/...
 
 .PHONY: test
-test: docker-build ## runs all test targets.
+test: yarn ## runs all test targets (requires a running dsp-stack).
+	bazel test //...
+
+.PHONY: test-e2e
+test-e2e: yarn dsp-stack-clone dsp-stack-run  ## runs all test targets and starts a dsp-stack.
 	bazel test //...
 
 #################################

@@ -1,0 +1,107 @@
+package(default_visibility = ["//visibility:public"])
+
+load("@npm//@bazel/typescript:index.bzl", "ts_library")
+load("@cypress//:index.bzl", "cypress_web_test")
+
+ts_library(
+    name = "hello_spec",
+    testonly = True,
+    srcs = [
+        "hello.spec.ts",
+    ],
+    tsconfig = "//:tsconfig.json",
+    deps = [
+        "@npm//@types",
+        "@npm//cypress",
+    ],
+    data = [
+        "@npm//cypress",
+    ]
+)
+
+ts_library(
+    name = "login_spec",
+    testonly = True,
+    srcs = [
+        "login.spec.ts",
+    ],
+    tsconfig = "//:tsconfig.json",
+    deps = [
+        "@npm//@types",
+        "@npm//cypress",
+    ],
+    data = [
+        "@npm//cypress",
+    ]
+)
+
+ts_library(
+    name = "project_selection_spec",
+    testonly = True,
+    srcs = [
+        "project-selection.spec.ts",
+    ],
+    tsconfig = "//:tsconfig.json",
+    deps = [
+        "@npm//@types",
+        "@npm//cypress",
+    ],
+    data = [
+        "@npm//cypress",
+    ]
+)
+
+
+ts_library(
+    name = "simple_search_spec",
+    testonly = True,
+    srcs = [
+        "simple-search.spec.ts",
+    ],
+    tsconfig = "//:tsconfig.json",
+    deps = [
+        "@npm//@types",
+        "@npm//cypress",
+    ],
+    data = [
+        "@npm//cypress",
+    ]
+)
+
+
+#cypress_web_test(
+#    # The name of your test target
+#    name = "simple_search_spec",
+#    srcs = [":simple_search.spec"],
+#    # A cypress config file is required
+#    config_file = "//e2e:cypress.json",
+#    # Any runtime dependencies you need to boot your server or run your tests
+#    data = [
+#        "@npm//rxjs",
+#        "@npm//express"
+#    ],
+#    # Your cypress plugin used to configure cypress and boot your server
+#    plugins_file = "//e2e/support:index",
+#)
+
+cypress_web_test(
+    # The name of your test target
+    name = "integration",
+    srcs = [
+        ":hello_spec",
+        ":login_spec",
+        ":project_selection_spec",
+        "simple_search_spec",
+        "world.spec.js"
+    ],
+    # A cypress config file is required
+    config_file = "//e2e:cypress.json",
+    # Any runtime dependencies you need to boot your server or run your tests
+    data = [
+        "@npm//rxjs",
+        "@npm//express",
+        "//app:public_folder",
+    ],
+    # Your cypress plugin used to configure cypress and boot your server
+    plugins_file = "//e2e/support:index",
+)
