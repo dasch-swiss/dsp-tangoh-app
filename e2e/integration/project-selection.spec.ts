@@ -1,4 +1,9 @@
 describe('Select Project', () => {
+    it('show all projects without login', () => {
+        cy.visit('/');
+        cy.get('body > .workwin_header > #searchctrl > #searchlimsel > #limitproject').find('option').should('have.length', 9)
+    });
+
     it('show one project after login', () => {
 
         cy.visit('/');
@@ -13,7 +18,7 @@ describe('Select Project', () => {
             expect($userInfo.get(0).innerText).to.contain('User : ');
         });
 
-        // "anything"
+        // anything
         cy.get('#projectctrl').should(($project: JQuery<HTMLElement>) => {
             expect($project.get(0).innerText).to.eq('Project : anything');
         })
@@ -27,7 +32,7 @@ describe('Select Project', () => {
         });
     });
 
-    it('show several projects after login', () => {
+    it('show three projects after login', () => {
 
         cy.visit('/');
 
@@ -42,7 +47,7 @@ describe('Select Project', () => {
         });
 
 
-        // "anything"
+        // anything / incunabula / images
         cy.get('#projectctrl').should(($projects: JQuery<HTMLElement>) => {
             const options = Cypress.$($projects.get(0)).find('option');
 
@@ -51,7 +56,6 @@ describe('Select Project', () => {
             expect(options.get().map(opt => opt.innerText)).to.contain('anything');
             expect(options.get().map(opt => opt.innerText)).to.contain('incunabula');
             expect(options.get().map(opt => opt.innerText)).to.contain('images');
-
         })
 
         // logout
