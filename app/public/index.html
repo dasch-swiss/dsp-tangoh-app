@@ -266,7 +266,9 @@
 						.simpledialog('loginbox', {'class': 'loginbox', width: 400, positioning: 'upper', focus: '#user_id'})
 					);
 					if (SALSAH.reset_project_selection !== undefined) SALSAH.reset_project_selection();
-					$('#searchlimsel').empty();
+					// user is not logged in,
+					// get all projects
+					limit_simple_search_get_all_projects();
 				}
 				else {
 					alert(data.errormsg);
@@ -330,15 +332,14 @@
 				extended_search();
 			})
 		);
-		
 
+		var selele;
+		$('#searchlimsel')
+		.empty()
+		.append(s_('_limitsearch'))
+		.append(selele = $('<select>').attr({id: 'limitproject', title: 'limit search to project'}));
+		selele.append($('<option>').attr({title: 'ALl'}).val(-1).text('-'));
 		if (SALSAH.userprofile.projects_info) {
-			var selele;
-			$('#searchlimsel')
-			.empty()
-			.append(s_('_limitsearch'))
-			.append(selele = $('<select>').attr({id: 'limitproject', title: 'limit search to project'}));
-			selele.append($('<option>').attr({title: 'ALl'}).val(-1).text('-'));
 			for (var p in SALSAH.userprofile.projects_info) {
 				if (p == SALSAH.userprofile.active_project) {
 					selele.append($('<option>').attr({title: SALSAH.userprofile.projects_info[p].longname, selected: true}).val(p).text(SALSAH.userprofile.projects_info[p].shortname));
@@ -347,9 +348,29 @@
 					selele.append($('<option>').attr({title: SALSAH.userprofile.projects_info[p].longname}).val(p).text(SALSAH.userprofile.projects_info[p].shortname));
 				}
 			}
+		} else {
+			// user is not logged in,
+			// get all projects
+			limit_simple_search_get_all_projects();
 		}
 
-	};
+
+	}
+
+	/**
+	 * Gets all projects for selection in simple search field.
+	 */
+	function limit_simple_search_get_all_projects() {
+		SALSAH.ApiGet('projects', function(data) {
+			if (data.status == ApiErrors.OK) {
+				for (var p in data.projects) {
+					$('#searchlimsel select').append($('<option>').attr({title: data.projects[p].longname}).val(data.projects[p].id).text(data.projects[p].shortname));
+				}
+			} else {
+				alert(data.errormsg);
+			}
+		});
+	}
 	
 	$(function(){
 		if (SALSAH.userprofile === undefined) SALSAH.userprofile = {};

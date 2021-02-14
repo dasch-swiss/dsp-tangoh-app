@@ -68,22 +68,6 @@ ts_library(
     ]
 )
 
-
-#cypress_web_test(
-#    # The name of your test target
-#    name = "simple_search_spec",
-#    srcs = [":simple_search.spec"],
-#    # A cypress config file is required
-#    config_file = "//e2e:cypress.json",
-#    # Any runtime dependencies you need to boot your server or run your tests
-#    data = [
-#        "@npm//rxjs",
-#        "@npm//express"
-#    ],
-#    # Your cypress plugin used to configure cypress and boot your server
-#    plugins_file = "//e2e/support:index",
-#)
-
 cypress_web_test(
     # The name of your test target
     name = "integration",
