@@ -1,4 +1,6 @@
 {
   "baseUrl": "http://0.0.0.0:3335",
-  "chromeWebSecurity": false
+  "chromeWebSecurity": false,
+  "integrationFolder": "e2e/integration",
+  "testFiles": "*.spec.ts"
 }
