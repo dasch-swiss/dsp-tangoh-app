@@ -4,10 +4,10 @@ load("@npm//@bazel/typescript:index.bzl", "ts_library")
 load("@cypress//:index.bzl", "cypress_web_test")
 
 ts_library(
-    name = "hello_spec",
+    name = "page_spec",
     testonly = True,
     srcs = [
-        "hello.spec.ts",
+        "page.spec.ts",
     ],
     tsconfig = "//:tsconfig.json",
     deps = [
@@ -72,7 +72,7 @@ cypress_web_test(
     # The name of your test target
     name = "integration",
     srcs = [
-        ":hello_spec",
+        ":page_spec",
         ":login_spec",
         ":project_selection_spec",
         "simple_search_spec",

@@ -17,7 +17,7 @@
  *  License along with Knora.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-describe('hello', () => {
+describe('Page', () => {
     it('should find title text', () => {
         cy.visit('/');
         cy.get('title').contains('System');
