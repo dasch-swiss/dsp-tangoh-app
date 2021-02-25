@@ -834,6 +834,7 @@ input.disp_csv {
   cursor: pointer;
   white-space: nowrap;
   text-overflow: ellipsis;
+  max-width: 50%;
 }
 .dock > div.toggled {
   color: #fff;
