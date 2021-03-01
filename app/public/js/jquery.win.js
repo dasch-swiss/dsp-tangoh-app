@@ -297,7 +297,9 @@
 					position: 'absolute',
 					left: 0,
 					right: 0,
-					top: 0
+					top: 0,
+					'display': 	'flex',
+					'justify-content': 'space-between'
 				}).appendTo($this);
 				
 				//
@@ -308,7 +310,10 @@
 					'-moz-user-select': 'none',
 					'-khtml-user-select': 'none',
 					'-webkit-user-select': 'none',
-					'user-select': 'none'
+					'user-select': 'none',
+					'overflow': 'hidden',
+					'text-overflow': 'ellipsis',
+					'white-space': 'nowrap'
 				})
 				.append($('<img>', {src: localdata.settings.window_icon}).css({'vertical-align': 'middle'}))
 				.append(localdata.settings.title)
@@ -320,7 +325,8 @@
 				localdata.elements.controls = $('<div>').addClass('controls').css({
 					'float': 'right',
 					top: 0,
-					bottom: 0
+					bottom: 0,
+					'display': 'flex'
 				})
 				.appendTo(localdata.elements.titlebar);
 				

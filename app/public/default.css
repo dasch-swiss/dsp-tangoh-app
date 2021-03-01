@@ -820,6 +820,7 @@ input.disp_csv {
   right: 0;
   bottom: 0;
   height: 25px;
+  display: inline-flex;
 }
 .dock > div {
   float: left;
@@ -831,6 +832,9 @@ input.disp_csv {
   padding-right: 3px;
   overflow: hidden;
   cursor: pointer;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 50%;
 }
 .dock > div.toggled {
   color: #fff;

@@ -25,6 +25,7 @@
 	right: 0;
 	bottom: 0;
 	height: @DOCK_HEIGHT;
+	display: inline-flex;
 }
 
 .dock > div {
@@ -41,6 +42,9 @@
 	-khtml-border-radius: @DOCK_CORNER_RADIUS;
 	border-radius: @DOCK_CORNER_RADIUS;
 	cursor: pointer;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	max-width: 50%;
 }
 
 .dock > div.toggled {
