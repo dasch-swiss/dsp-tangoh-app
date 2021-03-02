@@ -16,16 +16,20 @@ describe('Resource Creation', () => {
 
         cy.get('#addresctrl img').click();
 
-        cy.get('.extsearch').select('http://www.knora.org/ontology/0001/anything#TrivialThing');
+        cy.get('.extsearch').select('http://www.knora.org/ontology/0001/anything#Thing');
 
-        cy.get('h2.propedit').should('have.text', 'Add Unbedeutendes Ding')
+        cy.get('h2.propedit').should('have.text', 'Add Ding')
 
         cy.get('input[name="__LABEL__"]').type('testlabel')
 
-        cy.get('input[value="Save"]').click()
+        cy.get('input[name="http://www.knora.org/ontology/0001/anything#hasText"]').type('testtext')
 
-        cy.get('#1 .value_container').should('have.text', 'testlabel')
-        
+        cy.get('input[value="Save"]').click({force: true}) // button may be covered by other ele
+
+        cy.get('#1 .value_container').eq(0).should('have.text', 'testlabel')
+
+        cy.get('#1 .value_container').eq(6).should('have.text', 'testtext')
+
         cy.get('#dologout').click();
         cy.get('#logout_button').click();
         cy.get('#userctrl').should(($userInfo: JQuery<HTMLElement>) => {
