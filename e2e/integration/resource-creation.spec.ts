@@ -31,9 +31,10 @@ describe('Resource Creation', () => {
         cy.wait('@create')
             .should((res: any) => {
                 expect(res.request.url).to.eq('http://0.0.0.0:3333/v1/resources')
+                expect(res.request.body.label).to.eq('testlabel')
                 expect(res.response?.body.status).to.eq(0);
             })
-        
+
         cy.get('#dologout').click();
         cy.get('#logout_button').click();
         cy.get('#userctrl').should(($userInfo: JQuery<HTMLElement>) => {
