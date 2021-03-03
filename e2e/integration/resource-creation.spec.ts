@@ -26,9 +26,9 @@ describe('Resource Creation', () => {
 
         cy.get('input[value="Save"]').click({force: true}) // button may be covered by other ele
 
-        cy.get('#1 .value_container').eq(0).should('have.text', 'testlabel')
+        cy.get('.value_container').eq(0).should('have.text', 'testlabel')
 
-        cy.get('#1 .value_container').eq(6).should('have.text', 'testtext')
+        cy.get('.value_container').eq(6).should('have.text', 'testtext')
 
         cy.get('#dologout').click();
         cy.get('#logout_button').click();
