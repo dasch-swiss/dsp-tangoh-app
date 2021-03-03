@@ -51,6 +51,38 @@ ts_library(
     ]
 )
 
+ts_library(
+    name = "resource_creation_spec",
+    testonly = True,
+    srcs = [
+        "resource-creation.spec.ts",
+    ],
+    tsconfig = "//:tsconfig.json",
+    deps = [
+        "@npm//@types",
+        "@npm//cypress",
+    ],
+    data = [
+        "@npm//cypress",
+    ]
+)
+
+ts_library(
+    name = "resource_editing_spec",
+    testonly = True,
+    srcs = [
+        "resource-editing.spec.ts",
+    ],
+    tsconfig = "//:tsconfig.json",
+    deps = [
+        "@npm//@types",
+        "@npm//cypress",
+    ],
+    data = [
+        "@npm//cypress",
+    ]
+)
+
 
 ts_library(
     name = "simple_search_spec",
@@ -74,6 +106,8 @@ cypress_web_test(
     srcs = [
         ":page_spec",
         ":login_spec",
+        ":resource_creation_spec",
+        ":resource_editing_spec",
         ":project_selection_spec",
         "simple_search_spec",
         "world.spec.js"
