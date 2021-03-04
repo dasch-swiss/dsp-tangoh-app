@@ -115,6 +115,8 @@ cypress_web_test(
     config_file = "//cypress:cypress.json",
     # Any runtime dependencies you need to boot your server or run your tests
     data = [
+        "//cypress/support:index",
+        "//cypress/support:commands",
         "@npm//rxjs",
         "@npm//express",
         "//app:public_folder"
