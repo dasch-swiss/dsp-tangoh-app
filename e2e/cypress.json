@@ -3,5 +3,6 @@
   "chromeWebSecurity": false,
   "integrationFolder": "e2e/integration",
   "testFiles": "*.spec.ts",
-  "defaultCommandTimeout": 10000
+  "defaultCommandTimeout": 10000,
+  "supportFile": "e2e/support/index.ts"
 }

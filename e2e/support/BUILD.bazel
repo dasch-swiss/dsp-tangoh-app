@@ -1,6 +1,19 @@
 package(default_visibility = ["//visibility:public"])
 
+load("@cypress//:index.bzl", "cypress_web_test")
 load("@npm//@bazel/typescript:index.bzl", "ts_library")
+
+# You must create a cypress plugin in order to boot a server to serve your application. It can be written as a javascript file or in typescript using ts_library or ts_project.
+ts_library(
+    name = "plugin",
+    testonly = True,
+    srcs = ["plugin.ts"],
+    tsconfig = "//:tsconfig.json",
+    deps = [
+        "@npm//@types",
+        "@npm//express",
+    ],
+)
 
 ts_library(
     name = "index",
@@ -11,4 +24,15 @@ ts_library(
         "@npm//@types",
         "@npm//cypress"
     ],
+)
+
+ts_library(
+    name = "commands",
+    testonly = True,
+    srcs = ["commands.ts",],
+    tsconfig = "//:tsconfig.json",
+    deps = [
+        "@npm//@types",
+        "@npm//cypress",
+    ]
 )

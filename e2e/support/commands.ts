@@ -23,5 +23,17 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+Cypress.Commands.add("login", (name: string, password: string) => {
+    cy.get('#dologin').click();
 
+    cy.get('#user_id').type(name);
+    cy.get('#password').type(password);
 
+    cy.get('#login_button').click();
+
+    cy.get('#userctrl').should(($userInfo: JQuery<HTMLElement>) => {
+        expect($userInfo.get(0).innerText).to.eq('User : Anything User01');
+    });
+});
+
+console.log('test commands')

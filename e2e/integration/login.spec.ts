@@ -2,6 +2,9 @@ describe('Login', () => {
 
     it('login as a known user', () => {
         cy.visit('/');
+
+        // cy.login('anything.user01@example.org', 'test');
+
         cy.get('#dologin').click();
         cy.get('#user_id').type('anything.user01@example.org');
         cy.get('#password').type('test');

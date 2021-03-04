@@ -121,5 +121,5 @@ cypress_web_test(
         "//app:public_folder",
     ],
     # Your cypress plugin used to configure cypress and boot your server
-    plugins_file = "//e2e/support:index",
+    plugins_file = "//e2e/support:plugin",
 )
