@@ -2,6 +2,8 @@ describe('Resource Creation', () => {
 
     it('create a new anything:Thing', () => {
 
+        cy.intercept('POST', '/v1/resources').as('create')
+
         cy.visit('/');
 
         // login
@@ -26,9 +28,12 @@ describe('Resource Creation', () => {
 
         cy.get('input[value="Save"]').click({force: true}) // button may be covered by other ele
 
-        cy.get('#1 .value_container').eq(0).should('have.text', 'testlabel')
-
-        cy.get('#1 .value_container').eq(6).should('have.text', 'testtext')
+        cy.wait('@create')
+            .should((res: any) => {
+                expect(res.request.url).to.eq('http://0.0.0.0:3333/v1/resources')
+                expect(res.request.body.label).to.eq('testlabel')
+                expect(res.response?.body.status).to.eq(0);
+            })
 
         cy.get('#dologout').click();
         cy.get('#logout_button').click();
