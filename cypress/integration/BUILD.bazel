@@ -113,7 +113,7 @@ cypress_web_test(
         "world.spec.js"
     ],
     # A cypress config file is required
-    config_file = "//e2e:cypress.json",
+    config_file = "//cypress:cypress.json",
     # Any runtime dependencies you need to boot your server or run your tests
     data = [
         "@npm//rxjs",
@@ -121,5 +121,5 @@ cypress_web_test(
         "//app:public_folder",
     ],
     # Your cypress plugin used to configure cypress and boot your server
-    plugins_file = "//e2e/support:plugin",
+    plugins_file = "//cypress/support:plugin",
 )
