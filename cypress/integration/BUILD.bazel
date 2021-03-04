@@ -109,8 +109,7 @@ cypress_web_test(
         ":resource_creation_spec",
         ":resource_editing_spec",
         ":project_selection_spec",
-        "simple_search_spec",
-        "world.spec.js"
+        "simple_search_spec"
     ],
     # A cypress config file is required
     config_file = "//cypress:cypress.json",
