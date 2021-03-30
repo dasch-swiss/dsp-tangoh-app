@@ -1297,9 +1297,81 @@
 
 
 			postdata[VALTYPE_ICONCLASS] = postdata[VALTYPE_TEXT];
-			postdata[VALTYPE_GEONAME] = postdata[VALTYPE_TEXT];
-            
-			
+
+			postdata[VALTYPE_GEONAME] = function(value_container, prop, value_index, value, is_new_value) {
+				var data = {};
+				if (is_new_value) {
+					data.geom_value = value;
+					data.res_id = res_id;
+					data.prop = prop;
+					data.project_id = project_id;
+					SALSAH.ApiPost('values', data, function(data) {
+						if (data.status == ApiErrors.OK) {
+							if (!propinfo[active.prop].values) propinfo[active.prop].values = Array();
+							if (!propinfo[active.prop].value_ids) propinfo[active.prop].value_ids = Array();
+							if (!propinfo[active.prop].value_rights) propinfo[active.prop].value_rights = Array();
+							if (!propinfo[active.prop].value_iconsrcs) propinfo[active.prop].value_iconsrcs = Array();
+							if (!propinfo[active.prop].value_firstprops) propinfo[active.prop].value_firstprops = Array();
+							if (!propinfo[active.prop].value_restype) propinfo[active.prop].value_restype = Array();
+							if (propinfo[active.prop].valuetype_id == VALTYPE_GEOMETRY) {
+								var tmpgeo = JSON.parse(data.value);
+								tmpgeo.val_id = data.id;
+								tmpgeo.res_id = res_id;
+								if ((typeof options === 'object') && (typeof options.canvas !== 'undefined')) {
+									options.canvas.regions('setObjectAttribute', 'val_id', data.id, value_container.find('span').data('figure_index'));
+									options.canvas.regions('setObjectAttribute', 'res_id', res_id, value_container.find('span').data('figure_index'));
+								}
+								propinfo[active.prop].values[active.value_index] = JSON.stringify(tmpgeo);
+							}
+							else {
+								propinfo[active.prop].values[active.value_index] = data.value;
+							}
+							propinfo[active.prop].value_ids[active.value_index] = data.id;
+							propinfo[active.prop].value_rights[active.value_index] = data.rights;
+							propinfo[active.prop].value_iconsrcs[active.value_index] = null;
+							propinfo[active.prop].value_firstprops[active.value_index] = null;
+							propinfo[active.prop].value_restype[active.value_index] = null;
+
+							active.value_container.empty();
+							reset_value(active.value_container, active.prop, active.value_index);
+							if (active.is_new_value) {
+								var prop_container = active.value_container.parent();
+								make_add_button(prop_container, active.prop);
+							}
+						}
+						else {
+							alert(status.errormsg);
+						}
+						active = undefined;
+					}).fail(function(){
+						cancel_edit(value_container);
+					});
+				}
+				else {
+					data.value = value;
+					SALSAH.ApiPut('values/' + propinfo[prop].value_ids[value_index], data, function(data) {
+						if (data.status == ApiErrors.OK) {
+							propinfo[active.prop].values[active.value_index] = data.value;
+
+							active.value_container.empty();
+							reset_value(active.value_container, active.prop, active.value_index);
+							if (active.is_new_value) {
+								var prop_container = active.value_container.parent();
+								make_add_button(prop_container, active.prop);
+							}
+						}
+						else {
+							alert(status.errormsg);
+						}
+						active = undefined;
+					}).fail(function(){
+						cancel_edit(value_container);
+					});
+				}
+			};
+
+
+
 			postdata['LOCATION'] = function(value_container, prop, res_id, sipi_response, is_new_value) {
 				var data = {};
 				if (is_new_value) {
@@ -1944,6 +2016,7 @@
 
 				case 'geoname': {
 					var tmpele = $('<span>', attributes).appendTo(value_container);
+					console.log('editing geoname')
 					if (is_new_value) {
 						tmpele.geonames('edit', {new_entry_allowed: true});
 					}
