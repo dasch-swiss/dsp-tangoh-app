@@ -1348,8 +1348,8 @@
 					});
 				}
 				else {
-					data.value = value;
-					SALSAH.ApiPut('values/' + propinfo[prop].value_ids[value_index], data, function(data) {
+					data.geoname_value = value;
+					SALSAH.ApiPut('values/' + encodeURIComponent(propinfo[prop].value_ids[value_index]), data, function(data) {
 						if (data.status == ApiErrors.OK) {
 							propinfo[active.prop].values[active.value_index] = data.value;
 
