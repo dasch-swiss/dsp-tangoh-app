@@ -371,7 +371,7 @@
 			var val;
 			if ((localdata.settings.new_entry_allowed !== undefined) && (localdata.settings.new_entry_allowed))
 			{
-				val = 'gnid:' + $this.find('.geonames_field').data('geonameId');
+				val = $this.find('.geonames_field').data('geonameId').toString();
 			}
 			else {
 				val = localdata.ele.seldiv[localdata.ele.seldiv.length - 1].find('select').val();
