@@ -1301,7 +1301,7 @@
 			postdata[VALTYPE_GEONAME] = function(value_container, prop, value_index, value, is_new_value) {
 				var data = {};
 				if (is_new_value) {
-					data.geom_value = value;
+					data.geoname_value = value;
 					data.res_id = res_id;
 					data.prop = prop;
 					data.project_id = project_id;
