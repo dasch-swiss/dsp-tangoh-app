@@ -203,6 +203,7 @@ SALSAH.showval = function(value_container, prop, value_index, options)
 			break;
 		}
 		case VALTYPE_GEONAME: {
+			console.log('geoname val ', prop.values[value_index]);
 			value_container.geonames('init', {value: prop.values[value_index]});
 			break;
 		}
