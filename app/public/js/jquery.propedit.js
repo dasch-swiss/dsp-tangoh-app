@@ -2016,7 +2016,7 @@
 
 				case 'geoname': {
 					var tmpele = $('<span>', attributes).appendTo(value_container);
-					console.log('editing geoname')
+
 					if (is_new_value) {
 						tmpele.geonames('edit', {new_entry_allowed: true});
 					}

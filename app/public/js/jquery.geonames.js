@@ -161,38 +161,32 @@
 				$.extend(localdata.settings, options);
 
 				$this.data('localdata', localdata); // initialize a local data object which is attached to the DOM object
-				SALSAH.ApiGet('geonames', localdata.settings.value, {reqtype: 'node'}, function(data) {
-					if (data.status == ApiErrors.OK) {
-						var revarr = data.nodelist.reverse();
-						var str = '';
-						for (var i in revarr) {
-							if (i > 0) str += ', ';
-							str += String(revarr[i].label);
-						}
-						//console.log(revarr[0]);
+
+				$.getJSON('https://ws.geonames.net/getJSON?geonameId=' + localdata.settings.value + '&username=knora&style=long', function(data) {
+
 						$this.append(
 							$('<span>')
-							.text(String(revarr[0].label))
-							.attr({title: str})
+							.text(String(data.name))
+							.attr({title: data.name})
 							.on('click', function(ev) {
 								var ele = $('<div>').addClass('value_comment tooltip').css({'display': 'block', opacity: '1', 'position': 'fixed', 'z-index': 1000}).appendTo('body');
 								ele.append($('<div>').text('X').on('click', function(){
 									ele.remove();
 								}));
-								if (revarr[0].wikipedia) {
+								if (data.wikipediaURL) {
 									ele.append(
 										$('<a>').attr({
-											href: 'http://' + revarr[0].wikipedia,
+											href: 'http://' + data.wikipediaURL,
 											target: '_blank'
 										}).append($('<img>').attr({src: SITE_URL + '/app/icons/wikipedia.png'})).on('click', function() {
 											ele.remove();
 										})
 									);
 								}
-								if ((revarr[0].lng) && (revarr[0].lat)) {
+								if ((data.lng) && (data.lat)) {
 									ele.append(
 										$('<a>').attr({
-											href: 'http://maps.google.com/?q=' + revarr[0].lat + ',' + revarr[0].lng,
+											href: 'http://maps.google.com/?q=' + data.lat + ',' + data.lng,
 											target: '_blank'
 										}).append($('<img>').attr({src: SITE_URL + '/app/icons/google_maps.png'})).on('click', function() {
 											ele.remove();
@@ -203,11 +197,11 @@
 								ele.css({'display': 'block'});
 								ele.css({'left': (offs.left + 10) + 'px', 'top': (offs.top + 10) + 'px'});
 							})
-						);
-					}
-					else {
-						alert(data.errormsg);
-					}
+							);
+
+				}).fail(function( jqxhr, textStatus, error) {
+					var err = textStatus + ", " + error;
+					alert('Geonames getJSON error for ' + localdata.settings.value + ': ' + err);
 				});
 			});
 		},
