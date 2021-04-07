@@ -97,7 +97,7 @@
 					$this
 						.attr({contenteditable: false})
 						.css(localdata.settings.css)
-						.html(htmlstr);
+						.text(htmlstr);
 					// above '.text' encode '<strong>' in '&lt;strong&gt;'
 					// below replaces the remaining '\n' with '<br>'
 					$this.html($this.html().replace(/\n/g, '<br>'));
