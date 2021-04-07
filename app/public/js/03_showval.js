@@ -61,7 +61,12 @@ SALSAH.showval = function(value_container, prop, value_index, options)
 		}
 		case VALTYPE_URI: {
 			// TODO: check for valid URL
-			value_container.append($('<a href="' + prop.values[value_index] + '" target="_blank">' + prop.values[value_index] + '</a>' ));
+			var uri_val = prop.values[value_index];
+			if (uri_val.indexOf('http') === 0) {
+				value_container.append($('<a href="' + uri_val + '" target="_blank">' + uri_val + '</a>' ));
+			} else {
+				value_container.append(uri_val);
+			}
 			break;
 		}
 		case VALTYPE_DATE: {
