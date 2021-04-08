@@ -60,7 +60,6 @@ SALSAH.showval = function(value_container, prop, value_index, options)
 			break;
 		}
 		case VALTYPE_URI: {
-			// TODO: check for valid URL
 			var uri_val = prop.values[value_index];
 			if (uri_val.indexOf('http') === 0) {
 				value_container.append($('<a href="' + uri_val + '" target="_blank">' + uri_val + '</a>' ));
