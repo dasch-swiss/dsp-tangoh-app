@@ -236,144 +236,70 @@
 				}
 				$this.data('localdata', localdata);
 
-				if (localdata.settings.new_entry_allowed)
-				{
-					$this.html(
-						my.input = $('<input>')
-							.attr({
-								type: 'text',
-								id: 'city'})
-							.addClass('input-large geonames_field')
-					);
+				$this.html(
+					my.input = $('<input>')
+						.attr({
+							type: 'text',
+							id: 'city'})
+						.addClass('input-large geonames_field')
+				);
 
-					my.input.focus().autocomplete({
-						source: function (request, response) {
-							getGeoNames('search', {
-								featureClass: my.featureClass.PopulatedPlaceFeatures,
-								featureClass: my.AdministrativeBoundaryFeatures,
-								style: "full",
-								maxRows: 12,
-								name_startsWith: request.term
-							}, function (data) {
-								response($.map(data.geonames, function (item) {
-									var displayName = undefined;
-									for (var i in item.alternateNames) { // here we search through the alternate names to get the proper language
-										if (item.alternateNames[i].lang == SALSAH.userprofile.userData.lang) {
-											if (displayName === undefined) {
-												displayName = item.alternateNames[i].name;
-											}
-											else {
-												if (item.alternateNames[i].isPreferredName) displayName = item.alternateNames[i].name;
-											}
+				my.input.focus().autocomplete({
+					source: function (request, response) {
+						getGeoNames('search', {
+							featureClass: my.featureClass.PopulatedPlaceFeatures,
+							featureClass: my.AdministrativeBoundaryFeatures,
+							style: "full",
+							maxRows: 12,
+							name_startsWith: request.term
+						}, function (data) {
+							response($.map(data.geonames, function (item) {
+								var displayName = undefined;
+								for (var i in item.alternateNames) { // here we search through the alternate names to get the proper language
+									if (item.alternateNames[i].lang == SALSAH.userprofile.userData.lang) {
+										if (displayName === undefined) {
+											displayName = item.alternateNames[i].name;
+										}
+										else {
+											if (item.alternateNames[i].isPreferredName) displayName = item.alternateNames[i].name;
 										}
 									}
-									if (displayName === undefined) displayName = item.name;
-									displayName = displayName + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName + ' [' + item.fclName +']';
-									return {
-										label: displayName,
-										value: displayName,
-										details: item
-									};
-								}));
-							}, my);
-						},
-						minLength: 2,
-						select: function( event, ui ) {
-							$this.find('.geonames_field').data({geonameId: ui.item.details.geonameId});
-							//alert('geonameId: ' + ui.item.details.geonameId + ', value: ' + ui.item.value + ', label: ' + ui.item.label + ' ' + ui.item.details.lat + ', ' + ui.item.details.lng);
+								}
+								if (displayName === undefined) displayName = item.name;
+								displayName = displayName + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName + ' [' + item.fclName +']';
+								return {
+									label: displayName,
+									value: displayName,
+									details: item
+								};
+							}));
+						}, my);
+					},
+					minLength: 2,
+					select: function( event, ui ) {
+						$this.find('.geonames_field').data({geonameId: ui.item.details.geonameId});
+						//alert('geonameId: ' + ui.item.details.geonameId + ', value: ' + ui.item.value + ', label: ' + ui.item.label + ' ' + ui.item.details.lat + ', ' + ui.item.details.lng);
 
-							if (ui && ui.item && options && options.callback) {
-								options.callback(ui.item.details);
-							}
-						},
-						open: function () {
-							$(this).removeClass("ui-corner-all").addClass("ui-corner-top");
-						},
-						close: function () {
-							$(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+						if (ui && ui.item && options && options.callback) {
+							options.callback(ui.item.details);
 						}
-					});
-				}
-				else {
-					SALSAH.ApiGet('geonames', {}, function(data) {
-						if (data.status == ApiErrors.OK) {
-							var hlist = data.hlist;
-							var tmp_hlist;
-							var selected_node_ids = node_path(hlist, localdata.settings.value);
-							var selele;
-
-							if (selected_node_ids.length == 0) selected_node_ids[0] = hlist[0].id;
-							localdata.ele.seldiv = [];
-							for (var sid in selected_node_ids) {
-								if (localdata.settings.vsize > 1) {
-									$this.append(localdata.ele.seldiv[sid] = $('<span>'));
-									localdata.ele.seldiv[sid].append(selele = $('<select>').attr('size', localdata.settings.vsize).addClass('propedit').data('level', sid).on('change', function(event) {
-										selection_changed(localdata.ele.seldiv, data.hlist, $(this), localdata.settings.vsize);
-									}));
-								}
-								else {
-									$this.append(localdata.ele.seldiv[sid] = $('<div>'));
-									localdata.ele.seldiv[sid].append(selele = $('<select>').addClass('propedit').data('level', sid).on('change', function(event) {
-										selection_changed(localdata.ele.seldiv, data.hlist, $(this));
-									}));
-								}
-								if (sid > 0) {
-									$('<option>', {value: 0}).text(' ').appendTo(selele);
-								}
-								for (var i in hlist) {
-									if (selected_node_ids[sid] == hlist[i].id) {
-										$('<option>', {value: hlist[i].id, selected: 'selected'}).text(hlist[i].label).appendTo(selele);
-										tmp_hlist = hlist[i].children;
-									}
-									else {
-										$('<option>', {value: hlist[i].id}).text(hlist[i].label).appendTo(selele);
-									}
-								}
-								hlist = tmp_hlist;
-							}
-							if (hlist) { //the last has children
-								sid++;
-								if (localdata.settings.vsize > 1) {
-									$this.append(localdata.ele.seldiv[sid] = $('<span>'));
-									localdata.ele.seldiv[sid].append(selele = $('<select>').attr('size', localdata.settings.vsize).addClass('propedit').data('level', sid).on('change', function(event) {
-										selection_changed(localdata.ele.seldiv, data.hlist, $(this), localdata.settings.vsize);
-									}));
-								}
-								else {
-									$this.append(localdata.ele.seldiv[sid] = $('<div>'));
-									localdata.ele.seldiv[sid].append(selele = $('<select>').addClass('propedit').data('level', sid).on('change', function(event) {
-										selection_changed(localdata.ele.seldiv, data.hlist, $(this));
-									}));
-								}
-								$('<option>', {value: 0, selected: 'selected'}).text(' ').appendTo(selele);
-								for (i in hlist) {
-									$('<option>', {value: hlist[i].id}).text(hlist[i].label).appendTo(selele);
-								}
-							}
-						}
-						else {
-							alert(data.errormsg);
-						}
-					});
-				}
+					},
+					open: function () {
+						$(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+					},
+					close: function () {
+						$(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+					}
+				});
 			});
 		},
 
 		value: function(options) {
 			var $this = $(this);
 			var localdata = $this.data('localdata');
-			var val;
-			if ((localdata.settings.new_entry_allowed !== undefined) && (localdata.settings.new_entry_allowed))
-			{
-				val = $this.find('.geonames_field').data('geonameId').toString();
-			}
-			else {
-				val = localdata.ele.seldiv[localdata.ele.seldiv.length - 1].find('select').val();
-				if ((val == 0) && (localdata.ele.seldiv.length > 1)) {
-					val = localdata.ele.seldiv[localdata.ele.seldiv.length - 2].find('select').val();
-				}
-			}
-			return val;
+
+			return $this.find('.geonames_field').data('geonameId').toString();
+
 		},
         /*===========================================================================*/
 
