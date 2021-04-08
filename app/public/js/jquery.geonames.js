@@ -161,38 +161,32 @@
 				$.extend(localdata.settings, options);
 
 				$this.data('localdata', localdata); // initialize a local data object which is attached to the DOM object
-				SALSAH.ApiGet('geonames', localdata.settings.value, {reqtype: 'node'}, function(data) {
-					if (data.status == ApiErrors.OK) {
-						var revarr = data.nodelist.reverse();
-						var str = '';
-						for (var i in revarr) {
-							if (i > 0) str += ', ';
-							str += String(revarr[i].label);
-						}
-						//console.log(revarr[0]);
+
+				$.getJSON('https://ws.geonames.net/getJSON?geonameId=' + localdata.settings.value + '&username=knora&style=long', function(data) {
+
 						$this.append(
 							$('<span>')
-							.text(String(revarr[0].label))
-							.attr({title: str})
+							.text(String(data.name))
+							.attr({title: data.name})
 							.on('click', function(ev) {
 								var ele = $('<div>').addClass('value_comment tooltip').css({'display': 'block', opacity: '1', 'position': 'fixed', 'z-index': 1000}).appendTo('body');
 								ele.append($('<div>').text('X').on('click', function(){
 									ele.remove();
 								}));
-								if (revarr[0].wikipedia) {
+								if (data.wikipediaURL) {
 									ele.append(
 										$('<a>').attr({
-											href: 'http://' + revarr[0].wikipedia,
+											href: 'http://' + data.wikipediaURL,
 											target: '_blank'
 										}).append($('<img>').attr({src: SITE_URL + '/app/icons/wikipedia.png'})).on('click', function() {
 											ele.remove();
 										})
 									);
 								}
-								if ((revarr[0].lng) && (revarr[0].lat)) {
+								if ((data.lng) && (data.lat)) {
 									ele.append(
 										$('<a>').attr({
-											href: 'http://maps.google.com/?q=' + revarr[0].lat + ',' + revarr[0].lng,
+											href: 'http://maps.google.com/?q=' + data.lat + ',' + data.lng,
 											target: '_blank'
 										}).append($('<img>').attr({src: SITE_URL + '/app/icons/google_maps.png'})).on('click', function() {
 											ele.remove();
@@ -203,11 +197,11 @@
 								ele.css({'display': 'block'});
 								ele.css({'left': (offs.left + 10) + 'px', 'top': (offs.top + 10) + 'px'});
 							})
-						);
-					}
-					else {
-						alert(data.errormsg);
-					}
+							);
+
+				}).fail(function( jqxhr, textStatus, error) {
+					var err = textStatus + ", " + error;
+					alert('Geonames getJSON error for ' + localdata.settings.value + ': ' + err);
 				});
 			});
 		},
@@ -242,144 +236,70 @@
 				}
 				$this.data('localdata', localdata);
 
-				if (localdata.settings.new_entry_allowed)
-				{
-					$this.html(
-						my.input = $('<input>')
-							.attr({
-								type: 'text',
-								id: 'city'})
-							.addClass('input-large geonames_field')
-					);
+				$this.html(
+					my.input = $('<input>')
+						.attr({
+							type: 'text',
+							id: 'city'})
+						.addClass('input-large geonames_field')
+				);
 
-					my.input.focus().autocomplete({
-						source: function (request, response) {
-							getGeoNames('search', {
-								featureClass: my.featureClass.PopulatedPlaceFeatures,
-								featureClass: my.AdministrativeBoundaryFeatures,
-								style: "full",
-								maxRows: 12,
-								name_startsWith: request.term
-							}, function (data) {
-								response($.map(data.geonames, function (item) {
-									var displayName = undefined;
-									for (var i in item.alternateNames) { // here we search through the alternate names to get the proper language
-										if (item.alternateNames[i].lang == SALSAH.userprofile.userData.lang) {
-											if (displayName === undefined) {
-												displayName = item.alternateNames[i].name;
-											}
-											else {
-												if (item.alternateNames[i].isPreferredName) displayName = item.alternateNames[i].name;
-											}
+				my.input.focus().autocomplete({
+					source: function (request, response) {
+						getGeoNames('search', {
+							featureClass: my.featureClass.PopulatedPlaceFeatures,
+							featureClass: my.AdministrativeBoundaryFeatures,
+							style: "full",
+							maxRows: 12,
+							name_startsWith: request.term
+						}, function (data) {
+							response($.map(data.geonames, function (item) {
+								var displayName = undefined;
+								for (var i in item.alternateNames) { // here we search through the alternate names to get the proper language
+									if (item.alternateNames[i].lang == SALSAH.userprofile.userData.lang) {
+										if (displayName === undefined) {
+											displayName = item.alternateNames[i].name;
+										}
+										else {
+											if (item.alternateNames[i].isPreferredName) displayName = item.alternateNames[i].name;
 										}
 									}
-									if (displayName === undefined) displayName = item.name;
-									displayName = displayName + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName + ' [' + item.fclName +']';
-									return {
-										label: displayName,
-										value: displayName,
-										details: item
-									};
-								}));
-							}, my);
-						},
-						minLength: 2,
-						select: function( event, ui ) {
-							$this.find('.geonames_field').data({geonameId: ui.item.details.geonameId});
-							//alert('geonameId: ' + ui.item.details.geonameId + ', value: ' + ui.item.value + ', label: ' + ui.item.label + ' ' + ui.item.details.lat + ', ' + ui.item.details.lng);
+								}
+								if (displayName === undefined) displayName = item.name;
+								displayName = displayName + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName + ' [' + item.fclName +']';
+								return {
+									label: displayName,
+									value: displayName,
+									details: item
+								};
+							}));
+						}, my);
+					},
+					minLength: 2,
+					select: function( event, ui ) {
+						$this.find('.geonames_field').data({geonameId: ui.item.details.geonameId});
+						//alert('geonameId: ' + ui.item.details.geonameId + ', value: ' + ui.item.value + ', label: ' + ui.item.label + ' ' + ui.item.details.lat + ', ' + ui.item.details.lng);
 
-							if (ui && ui.item && options && options.callback) {
-								options.callback(ui.item.details);
-							}
-						},
-						open: function () {
-							$(this).removeClass("ui-corner-all").addClass("ui-corner-top");
-						},
-						close: function () {
-							$(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+						if (ui && ui.item && options && options.callback) {
+							options.callback(ui.item.details);
 						}
-					});
-				}
-				else {
-					SALSAH.ApiGet('geonames', {}, function(data) {
-						if (data.status == ApiErrors.OK) {
-							var hlist = data.hlist;
-							var tmp_hlist;
-							var selected_node_ids = node_path(hlist, localdata.settings.value);
-							var selele;
-
-							if (selected_node_ids.length == 0) selected_node_ids[0] = hlist[0].id;
-							localdata.ele.seldiv = [];
-							for (var sid in selected_node_ids) {
-								if (localdata.settings.vsize > 1) {
-									$this.append(localdata.ele.seldiv[sid] = $('<span>'));
-									localdata.ele.seldiv[sid].append(selele = $('<select>').attr('size', localdata.settings.vsize).addClass('propedit').data('level', sid).on('change', function(event) {
-										selection_changed(localdata.ele.seldiv, data.hlist, $(this), localdata.settings.vsize);
-									}));
-								}
-								else {
-									$this.append(localdata.ele.seldiv[sid] = $('<div>'));
-									localdata.ele.seldiv[sid].append(selele = $('<select>').addClass('propedit').data('level', sid).on('change', function(event) {
-										selection_changed(localdata.ele.seldiv, data.hlist, $(this));
-									}));
-								}
-								if (sid > 0) {
-									$('<option>', {value: 0}).text(' ').appendTo(selele);
-								}
-								for (var i in hlist) {
-									if (selected_node_ids[sid] == hlist[i].id) {
-										$('<option>', {value: hlist[i].id, selected: 'selected'}).text(hlist[i].label).appendTo(selele);
-										tmp_hlist = hlist[i].children;
-									}
-									else {
-										$('<option>', {value: hlist[i].id}).text(hlist[i].label).appendTo(selele);
-									}
-								}
-								hlist = tmp_hlist;
-							}
-							if (hlist) { //the last has children
-								sid++;
-								if (localdata.settings.vsize > 1) {
-									$this.append(localdata.ele.seldiv[sid] = $('<span>'));
-									localdata.ele.seldiv[sid].append(selele = $('<select>').attr('size', localdata.settings.vsize).addClass('propedit').data('level', sid).on('change', function(event) {
-										selection_changed(localdata.ele.seldiv, data.hlist, $(this), localdata.settings.vsize);
-									}));
-								}
-								else {
-									$this.append(localdata.ele.seldiv[sid] = $('<div>'));
-									localdata.ele.seldiv[sid].append(selele = $('<select>').addClass('propedit').data('level', sid).on('change', function(event) {
-										selection_changed(localdata.ele.seldiv, data.hlist, $(this));
-									}));
-								}
-								$('<option>', {value: 0, selected: 'selected'}).text(' ').appendTo(selele);
-								for (i in hlist) {
-									$('<option>', {value: hlist[i].id}).text(hlist[i].label).appendTo(selele);
-								}
-							}
-						}
-						else {
-							alert(data.errormsg);
-						}
-					});
-				}
+					},
+					open: function () {
+						$(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+					},
+					close: function () {
+						$(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+					}
+				});
 			});
 		},
 
 		value: function(options) {
 			var $this = $(this);
 			var localdata = $this.data('localdata');
-			var val;
-			if ((localdata.settings.new_entry_allowed !== undefined) && (localdata.settings.new_entry_allowed))
-			{
-				val = 'gnid:' + $this.find('.geonames_field').data('geonameId');
-			}
-			else {
-				val = localdata.ele.seldiv[localdata.ele.seldiv.length - 1].find('select').val();
-				if ((val == 0) && (localdata.ele.seldiv.length > 1)) {
-					val = localdata.ele.seldiv[localdata.ele.seldiv.length - 2].find('select').val();
-				}
-			}
-			return val;
+
+			return $this.find('.geonames_field').data('geonameId').toString();
+
 		},
         /*===========================================================================*/
 
