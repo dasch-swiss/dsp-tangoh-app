@@ -298,7 +298,12 @@
 			var $this = $(this);
 			var localdata = $this.data('localdata');
 
-			return $this.find('.geonames_field').data('geonameId').toString();
+			var geo_data = $this.find('.geonames_field').data();
+			if (geo_data['geonameId'] !== undefined) {
+				return geo_data['geonameId'].toString();
+			} else {
+				return undefined;
+			}
 
 		},
         /*===========================================================================*/
