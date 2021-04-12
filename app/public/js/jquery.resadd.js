@@ -1119,14 +1119,18 @@
 										{
 											ele = form.find('[name="' + propname + '"]');
 											if (ele.length == 1) {
-												propvals[propname] = [{geoname_value: ele.geonames('value')}];
+												var geoname_id = ele.geonames('value');
+												if (geoname_id !== undefined) propvals[propname] = [{geoname_value: geoname_id}];
 											} else if (ele.length > 1) {
 												propvals[propname] = [];
 												ele.each(function() {
-													vv = {
-														geoname_value: $(this).geonames('value')
-													};
-													propvals[propname].push(vv);
+													var geoname_id = $(this).geonames('value');
+													if (geoname_id !== undefined) {
+														vv = {
+															geoname_value: geoname_id
+														};
+														propvals[propname].push(vv);
+													}
 												});
 											}
 											break;
