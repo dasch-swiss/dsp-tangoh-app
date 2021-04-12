@@ -101,10 +101,11 @@
 					// above '.text' encode '<strong>' in '&lt;strong&gt;'
 					// below replaces the remaining '\n' with '<br>'
 					$this.html($this.html().replace(/\n/g, '<br>'));
-                }
 
-                //var reg = new RegExp('([^f][^=][^"])(http://[^<>\\s]+[\\w\\d])', 'g');     // replace URLs with anchor tags (but only for strings beginning with http://, not for already existing a-tags containing href="http://")
-                //htmlstr = htmlstr.replace(reg, '$1<a href="$2" target="_blank">$2</a>');
+					var reg = new RegExp('(https?://[^<>\\s]+[\\w\\d])', 'g');     // replace URLs with anchor tags
+					$this.html($this.html().replace(reg, '<a href="$1" target="_blank">$1</a>'));
+
+                }
                 
 				$this.data('localdata', localdata); // initialize a local data object which is attached to the DOM object
 			});

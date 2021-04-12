@@ -60,7 +60,12 @@ SALSAH.showval = function(value_container, prop, value_index, options)
 			break;
 		}
 		case VALTYPE_URI: {
-			value_container.append(prop.values[value_index]);
+			var uri_val = prop.values[value_index];
+			if (uri_val.indexOf('http') === 0) {
+				value_container.append($('<a href="' + uri_val + '" target="_blank">' + uri_val + '</a>' ));
+			} else {
+				value_container.append(uri_val);
+			}
 			break;
 		}
 		case VALTYPE_DATE: {
