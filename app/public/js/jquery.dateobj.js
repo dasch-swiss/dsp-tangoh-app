@@ -257,7 +257,7 @@
 		else {
 			dayval = day > 0 ? day : '-';
 		}
-		var dayselattr = {type: 'text', size: 2, maxlength: 1, readonly: true};
+		var dayselattr = {type: 'text', size: 2, maxlength: 2, readonly: true};
 		if (precision == 'YEAR') {
 			dayselattr.disabled = true;
 		}
