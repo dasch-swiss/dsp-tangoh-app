@@ -41,14 +41,18 @@
     });
 
     QUnit.test('Initialization with options', function(assert) {
-        assert.expect(6);
+        assert.expect(10);
 
         var $fixture = $('#qunit-fixture');
         var $fixtureInitialized = $fixture.clipurl(
             {
                 site_url: 'http://0.0.0.0:3335/',
                 url: 'https://www.google.ch',
-                label: 'cool link'
+                label: 'cool link',
+                spec: {
+                    label: 'myspec',
+                    url: 'http://www.myspec.org'
+                }
             }
         );
 
@@ -56,10 +60,16 @@
 
         assert.equal($fixture.data('localdata').settings.url, 'https://www.google.ch');
         assert.equal($fixture.data('localdata').settings.label, 'cool link');
+        assert.equal($fixture.data('localdata').settings.site_url, 'http://0.0.0.0:3335/');
+        assert.equal($fixture.data('localdata').settings.spec.label, 'myspec');
+        assert.equal($fixture.data('localdata').settings.spec.url, 'http://www.myspec.org');
 
         var $input = $('input.clipit');
-
         assert.equal($($input[0]).val(), 'https://www.google.ch');
+
+        var spec = $('a.spec')[0];
+
+        assert.equal($(spec).text(), 'myspec');
 
         assert.strictEqual($fixture.length, $fixtureInitialized.length, 'Keep chainability');
         assert.strictEqual($fixture, $fixtureInitialized, 'Return the same object');

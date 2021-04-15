@@ -46,7 +46,10 @@
 
                 if (localdata.settings.spec.url && localdata.settings.spec.label) {
                     label.append(
-                        $('<a>').attr({href: localdata.settings.spec.url, target: '_blank'}).text(localdata.settings.spec.label));
+                        $('<a>')
+                            .attr({href: localdata.settings.spec.url, target: '_blank'})
+                            .addClass('spec')
+                            .text(localdata.settings.spec.label));
                 }
 
                 label.append(': ');
