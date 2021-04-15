@@ -10,7 +10,7 @@
 <script src="https://code.jquery.com/qunit/qunit-2.15.0.js"></script>
 
 <script>
-    QUnit.config.requireExpects = false;
+    QUnit.config.requireExpects = true;
 </script>
 <script>
 
@@ -37,7 +37,7 @@
     });
 
     QUnit.test('Initialization with options', function(assert) {
-        // assert.expect(5);
+        assert.expect(6);
         var $fixture = $('#qunit-fixture');
         var $fixtureInitialized = $fixture.clipurl({url: 'https://www.google.ch', label: 'cool link'});
 
@@ -45,6 +45,10 @@
 
         assert.equal($fixture.data('localdata').settings.url, 'https://www.google.ch');
         assert.equal($fixture.data('localdata').settings.label, 'cool link');
+
+        var $input = $('input.clipit');
+
+        assert.equal($($input[0]).val(), 'https://www.google.ch');
 
         assert.strictEqual($fixture.length, $fixtureInitialized.length, 'Keep chainability');
         assert.strictEqual($fixture, $fixtureInitialized, 'Return the same object');
