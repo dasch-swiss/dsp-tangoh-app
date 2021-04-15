@@ -22,8 +22,8 @@
 
     var methods = {
         init: function(options) {
-            console.log('init clipurl', options);
-            return this.each(function(options) {
+
+            return this.each(function() {
 
                 var $this = $(this);
                 var localdata = {};
