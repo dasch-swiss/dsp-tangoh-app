@@ -54,10 +54,17 @@
 
                 label.append(': ');
 
-                var drag = $('<img>').attr({src: localdata.settings.site_url + '/app/icons/16x16/attachment.png', title: 'Copy to clipboard'}).on('click', function() {
-                    $(this).next('.clipit').select();
-                    document.execCommand('copy');
-                })
+                var drag = $('<img>')
+                    .addClass('icon')
+                    .attr({src: localdata.settings.site_url + '/app/icons/16x16/attachment.png', title: 'Copy to clipboard'})
+                    .on('click', function() {
+                        var input = $(this).next('.clipit')
+                        $(input[0]).select();
+                        var copied = document.execCommand('copy');
+
+                        // console.log(copied);
+                    }
+                );
 
                 if (localdata.settings.draggable) {
                     drag.dragndrop('makeDraggable', 'HANDLE_ID', {handle_id: localdata.settings.url});

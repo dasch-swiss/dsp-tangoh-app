@@ -15,6 +15,18 @@
 
     // hack for dragndrop plugin
     window.SITE_URL = 'http://0.0.0.0:3335/';
+
+    var copied = false;
+
+    document.execCommand = function(arg) {
+
+        if (arg === 'copy') {
+            copied = true;
+            return true;
+        } else {
+            return false;
+        }
+    }
 </script>
 <script>
 
@@ -41,7 +53,7 @@
     });
 
     QUnit.test('Initialization with options', function(assert) {
-        assert.expect(10);
+        assert.expect(11);
 
         var $fixture = $('#qunit-fixture');
         var $fixtureInitialized = $fixture.clipurl(
@@ -70,9 +82,31 @@
         var spec = $('a.spec')[0];
 
         assert.equal($(spec).text(), 'myspec');
+        assert.equal($(spec).attr('href'), 'http://www.myspec.org');
 
         assert.strictEqual($fixture.length, $fixtureInitialized.length, 'Keep chainability');
         assert.strictEqual($fixture, $fixtureInitialized, 'Return the same object');
+
+    });
+
+    QUnit.test('Copy link to clipboard on click event', function(assert) {
+        assert.expect(2);
+
+        var $fixture = $('#qunit-fixture');
+        var $fixtureInitialized = $fixture.clipurl(
+            {
+                site_url: 'http://0.0.0.0:3335/',
+                url: 'https://www.google.ch',
+                label: 'cool link',
+            }
+        );
+
+        var $icon = $('img.icon');
+
+        $icon[0].click();
+
+        assert.equal(($($(document.activeElement)[0]).val()), 'https://www.google.ch');
+        assert.equal(copied, true);
 
     });
 
