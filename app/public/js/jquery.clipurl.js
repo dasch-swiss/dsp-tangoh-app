@@ -47,7 +47,7 @@
                 if (localdata.settings.spec.url && localdata.settings.spec.label) {
                     label.append(
                         $('<a>')
-                            .attr({href: localdata.settings.spec.url, target: '_blank'})
+                            .attr({ href: localdata.settings.spec.url, target: '_blank' })
                             .addClass('spec')
                             .text(localdata.settings.spec.label));
                 }
@@ -59,10 +59,9 @@
                     .attr({src: localdata.settings.site_url + '/app/icons/16x16/attachment.png', title: 'Copy to clipboard'})
                     .on('click', function() {
                         var input = $(this).next('.clipit')
-                        $(input[0]).select();
+                        input.first().select();
                         var copied = document.execCommand('copy');
 
-                        // console.log(copied);
                     }
                 );
 

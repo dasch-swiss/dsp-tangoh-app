@@ -7,20 +7,27 @@
 <div id="qunit-fixture"></div>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="../js/jquery.clipurl.js"></script>
-<script src="../js/jquery.dragndrop.js"></script>
 <script src="https://code.jquery.com/qunit/qunit-2.15.0.js"></script>
 
 <script>
     QUnit.config.requireExpects = true;
 
+    // mock drandrop plugin
+    $.fn.dragndrop = function() {
+
+    }
+
     // hack for dragndrop plugin
     window.SITE_URL = 'http://0.0.0.0:3335/';
 
+    // will be mutated when text is copied to clipboard
     var copied = false;
 
+    // mock copy to clipboard method
     document.execCommand = function(arg) {
 
         if (arg === 'copy') {
+            // method was called with the expected arg
             copied = true;
             return true;
         } else {
@@ -105,9 +112,9 @@
 
         $icon[0].click();
 
-        assert.equal(($($(document.activeElement)[0]).val()), 'https://www.google.ch');
         assert.equal(copied, true);
-
+        assert.equal(($(document.activeElement).first().val()), 'https://www.google.ch');
+        
     });
 
 
