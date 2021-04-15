@@ -7,10 +7,14 @@
 <div id="qunit-fixture"></div>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="../js/jquery.clipurl.js"></script>
+<script src="../js/jquery.dragndrop.js"></script>
 <script src="https://code.jquery.com/qunit/qunit-2.15.0.js"></script>
 
 <script>
     QUnit.config.requireExpects = true;
+
+    // hack for dragndrop plugin
+    window.SITE_URL = 'http://0.0.0.0:3335/';
 </script>
 <script>
 
@@ -38,8 +42,15 @@
 
     QUnit.test('Initialization with options', function(assert) {
         assert.expect(6);
+
         var $fixture = $('#qunit-fixture');
-        var $fixtureInitialized = $fixture.clipurl({url: 'https://www.google.ch', label: 'cool link'});
+        var $fixtureInitialized = $fixture.clipurl(
+            {
+                site_url: 'http://0.0.0.0:3335/',
+                url: 'https://www.google.ch',
+                label: 'cool link'
+            }
+        );
 
         assert.ok($fixtureInitialized, 'Menu initialized');
 

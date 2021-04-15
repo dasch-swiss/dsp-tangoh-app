@@ -28,15 +28,43 @@
                 var $this = $(this);
                 var localdata = {};
                 localdata.settings = {
+                    site_url: 'http://www.salsah.org',
                     label: 'type of link',
-                    url: 'https://www.dasch.swiss'
+                    spec: {
+                        label: undefined,
+                        url: undefined,
+                    },
+                    url: 'https://www.dasch.swiss',
+                    draggable: true
                 };
 
                 $.extend(localdata.settings, options);
 
-                $(this).append($('<input>')
+                var label = $('<em>')
+                    .addClass('propedit label')
+                    .text(localdata.settings.label + ' ');
+
+                if (localdata.settings.spec.url && localdata.settings.spec.label) {
+                    label.append(
+                        $('<a>').attr({href: localdata.settings.spec.url, target: '_blank'}).text(localdata.settings.spec.label));
+                }
+
+                label.append(': ');
+
+                var drag = $('<img>').attr({src: localdata.settings.site_url + '/app/icons/16x16/attachment.png', title: 'Copy to clipboard'}).on('click', function() {
+                    $(this).next('.clipit').select();
+                    document.execCommand('copy');
+                })
+
+                if (localdata.settings.draggable) {
+                    drag.dragndrop('makeDraggable', 'HANDLE_ID', {handle_id: localdata.settings.url});
+                }
+
+                var url = $('<input>')
                     .attr({type:'text', readOnly: true, size: '64'})
-                    .addClass('clipit').val(localdata.settings.url));
+                    .addClass('clipit').val(localdata.settings.url);
+
+                $(this).append(label).append(drag).append(url);
 
                 $this.data('localdata', localdata); // initialize a local data object which is attached to the DOM object
 

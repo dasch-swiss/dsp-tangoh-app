@@ -108,7 +108,16 @@
 					}).css({cursor: 'pointer'}).appendTo(value_container);
 				}
 
-				value_container.append($('<span>').clipurl({url: fullSize['path']}));
+				value_container.append($('<span>').clipurl({
+					site_url: SITE_URL,
+					url: fullSize['path'],
+					label: 'IIIF URL',
+					draggable: false,
+					spec: {
+						label: '(IIIF)',
+						url: 'https://iiif.io/api/image/3.0/'
+					}
+				}));
 
 				return; // Ok and done...
 			}
