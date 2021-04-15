@@ -108,6 +108,8 @@
 					}).css({cursor: 'pointer'}).appendTo(value_container);
 				}
 
+				value_container.append($('<span>').clipurl({url: fullSize['path']}));
+
 				return; // Ok and done...
 			}
 
