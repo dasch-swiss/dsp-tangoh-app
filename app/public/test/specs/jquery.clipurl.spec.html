@@ -6,7 +6,7 @@
 <div id="qunit"></div>
 <div id="qunit-fixture"></div>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="../js/jquery.clipurl.js"></script>
+<script src="../../js/jquery.clipurl.js"></script>
 <script src="https://code.jquery.com/qunit/qunit-2.15.0.js"></script>
 
 <script>
@@ -65,7 +65,7 @@
         var $fixture = $('#qunit-fixture');
         var $fixtureInitialized = $fixture.clipurl(
             {
-                site_url: 'http://0.0.0.0:3335/',
+                site_url: 'http://www.salsah.org',
                 url: 'https://www.google.ch',
                 label: 'cool link',
                 spec: {
@@ -79,7 +79,7 @@
 
         assert.equal($fixture.data('localdata').settings.url, 'https://www.google.ch');
         assert.equal($fixture.data('localdata').settings.label, 'cool link');
-        assert.equal($fixture.data('localdata').settings.site_url, 'http://0.0.0.0:3335/');
+        assert.equal($fixture.data('localdata').settings.site_url, 'http://www.salsah.org');
         assert.equal($fixture.data('localdata').settings.spec.label, 'myspec');
         assert.equal($fixture.data('localdata').settings.spec.url, 'http://www.myspec.org');
 
@@ -102,7 +102,7 @@
         var $fixture = $('#qunit-fixture');
         var $fixtureInitialized = $fixture.clipurl(
             {
-                site_url: 'http://0.0.0.0:3335/',
+                site_url: 'http://www.salsah.org',
                 url: 'https://www.google.ch',
                 label: 'cool link',
             }
