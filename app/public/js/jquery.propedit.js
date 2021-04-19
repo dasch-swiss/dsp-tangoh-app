@@ -112,7 +112,7 @@
 					site_url: SITE_URL,
 					url: fullSize['path'],
 					label: 'IIIF URL',
-					draggable: false,
+					draggable: true,
 					spec: {
 						label: '(IIIF)',
 						url: 'https://iiif.io/api/image/3.0/'

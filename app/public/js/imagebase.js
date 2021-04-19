@@ -55,7 +55,8 @@ $(function() {
 						spec: {
 							url: 'https://en.wikipedia.org/wiki/Archival_Resource_Key',
 							label: '(ARK)'
-						}
+						},
+						draggable: true
 					});
 				}
 			});
