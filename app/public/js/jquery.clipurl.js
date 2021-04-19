@@ -35,7 +35,7 @@
                         url: undefined,
                     },
                     url: 'https://www.dasch.swiss',
-                    draggable: true
+                    draggable: false
                 };
 
                 $.extend(localdata.settings, options);

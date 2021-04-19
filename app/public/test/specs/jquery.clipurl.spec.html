@@ -12,9 +12,15 @@
 <script>
     QUnit.config.requireExpects = true;
 
-    // mock drandrop plugin
-    $.fn.dragndrop = function() {
+    var makeDraggable, handle_arg, url_arg;
 
+    // mock drandrop plugin
+    $.fn.dragndrop = function(method, handle, url) {
+        if (method === 'makeDraggable') {
+            makeDraggable = true;
+            handle_arg = handle;
+            url_arg = url;
+        }
     }
 
     // hack for dragndrop plugin
@@ -114,6 +120,26 @@
 
         assert.equal(copied, true);
         assert.equal(($(document.activeElement).first().val()), 'https://www.google.ch');
+
+    });
+
+    QUnit.test('Activate maekDraggable', function(assert) {
+
+        assert.expect(3);
+
+        var $fixture = $('#qunit-fixture');
+        var $fixtureInitialized = $fixture.clipurl(
+            {
+                site_url: 'http://www.salsah.org',
+                url: 'https://www.google.ch',
+                label: 'cool link',
+                draggable: true
+            }
+        );
+
+        assert.equal(makeDraggable, true);
+        assert.equal(handle_arg, 'HANDLE_ID');
+        assert.propEqual(url_arg, {handle_id: 'https://www.google.ch'});
 
     });
 
