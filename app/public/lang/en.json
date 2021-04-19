@@ -182,6 +182,7 @@
 	"_search_term" : "Search term",
 	"_searchresfor" : "Search result for",
 	"_extsearch" : "Advanced search",
+	"_match": "match",
 	"_extsearchres" : "Total of %d hits",
 	"_fulltext_search" : "Fulltext search",
 	"_titlestruct_search" : "Search title structure",

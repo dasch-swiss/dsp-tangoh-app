@@ -236,7 +236,7 @@
 					switch (datatype) {
 						case VALTYPE_RICHTEXT:
 						case VALTYPE_TEXT: { // we use gui_element = "text"
-							compop.append($('<option>', {'value': 'MATCH', 'title': 'match'}).append('&isin;'));
+							compop.append($('<option>', {'value': 'MATCH', 'title': 'match (word)'}).append(strings._match));
 							compop.append($('<option>', {'value': 'MATCH_BOOLEAN', 'title': 'match boolean'}).append('&isin;&oplus;'));
 							compop.append($('<option>', {'value': 'EQ', 'title': 'equal'}).append('='));
 							compop.append($('<option>', {'value': '!EQ', 'title': 'not equal'}).append('&ne;'));

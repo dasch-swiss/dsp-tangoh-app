@@ -183,6 +183,7 @@
 	"_searchresfor" : "Suchresultat für",
 	"_extsearch" : "Erweiterte Suche",
 	"_extsearchres" : "Insgesamt %d Treffer",
+	"_match": "Übereinstimmung",
 	"_fulltext_search" : "Volltext-Suche",
 	"_titlestruct_search" : "Suche nach Titelstruktur",
 	"_show_numres" : "Anzahl der Treffer pro Seite",

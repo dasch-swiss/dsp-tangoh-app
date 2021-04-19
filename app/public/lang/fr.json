@@ -181,6 +181,7 @@
 	"_searchresfor" : "Résultats de la recherche pour",
 	"_extsearch" : "Recherche élargie",
 	"_extsearchres" : "Un total de %d résultats",
+	"_match": "concordance",
 	"_fulltext_search" : "recherche de texte intégral",
 	"_titlestruct_search" : "Recherche selon structure des titres",
 	"_show_numres" : "Nombre de résultats par page",
