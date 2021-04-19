@@ -246,6 +246,12 @@
 							valfield.append($('<input>', {'type': 'text', name: 'searchval', size: 32, maxlength: 255}).addClass('propval').data('gui_element', 'text'));
 							break;
 						}
+						case VALTYPE_URI: {
+							compop.append($('<option>', {'value': 'EQ', 'title': 'equal'}).append('='));
+							compop.append($('<option>', {'value': 'EXISTS', 'title': 'exists'}).append('&exist;'));
+							valfield.append($('<input>', {'type': 'text', name: 'searchval', size: 32, maxlength: 255}).addClass('propval').data('gui_element', 'text'));
+							break;
+						}
 						case VALTYPE_INTEGER: { // we use gui_element = "text"
 							compop.append($('<option>', {'value': 'EQ', 'title': 'equal'}).append('='));
 							compop.append($('<option>', {'value': 'GT', 'title': 'greater than'}).append('&gt;'));
@@ -438,8 +444,12 @@
 							compop.append($('<option>', {'value': 'EXISTS', 'title': 'exists'}).append('&exist;'));
 							break;
 						}
+						case VALTYPE_BOOLEAN: {
+							compop.append($('<option>', {'value': 'EQ', 'title': 'equal'}).append('='));
+							valfield.append($('<input>', {'type': 'checkbox', name: 'searchval'}).addClass('propval').data('gui_element', 'checkbox'));
+							break;
+						}
 						default: {
-						
 						}
 					}
 
@@ -747,6 +757,10 @@
 							}
 							case 'geonames': {
 								searchval.push($(searchval_ele[index]).geonames('value'));
+								break;
+							}
+							case 'checkbox': {
+								searchval.push($(searchval_ele[index]).is(':checked'));
 								break;
 							}
 							default: {
