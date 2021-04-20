@@ -237,7 +237,7 @@
 						case VALTYPE_RICHTEXT:
 						case VALTYPE_TEXT: { // we use gui_element = "text"
 							compop.append($('<option>', {'value': 'MATCH', 'title': 'match (word)'}).append(strings._match));
-							compop.append($('<option>', {'value': 'MATCH_BOOLEAN', 'title': 'match boolean'}).append('&isin;&oplus;'));
+							compop.append($('<option>', {'value': 'MATCH_BOOLEAN', 'title': 'match boolean'}).append(strings._match_boolean));
 							compop.append($('<option>', {'value': 'EQ', 'title': 'equal'}).append('='));
 							compop.append($('<option>', {'value': '!EQ', 'title': 'not equal'}).append('&ne;'));
 							compop.append($('<option>', {'value': 'LIKE', 'title': 'like'}).append('&sub;'));
