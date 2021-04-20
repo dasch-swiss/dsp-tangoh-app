@@ -241,7 +241,7 @@
 							compop.append($('<option>', {'value': 'EQ', 'title': '='}).append(strings._equal));
 							compop.append($('<option>', {'value': '!EQ', 'title': '\u2260'}).append(strings._not_equal));
 							compop.append($('<option>', {'value': 'LIKE', 'title': '\u2282'}).append(strings._like));
-							compop.append($('<option>', {'value': '!LIKE', 'title': 'not like'}).append('&nsub;'));
+							compop.append($('<option>', {'value': '!LIKE', 'title': '\u2284'}).append(strings._not_like));
 							compop.append($('<option>', {'value': 'EXISTS', 'title': 'exists'}).append('&exist;'));
 							valfield.append($('<input>', {'type': 'text', name: 'searchval', size: 32, maxlength: 255}).addClass('propval').data('gui_element', 'text'));
 							break;
