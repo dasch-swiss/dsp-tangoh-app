@@ -189,6 +189,7 @@
 	"_like": "like",
 	"_not_like": "not like",
 	"_exists": "exists",
+	"_greater_than": "greater than",
 	"_extsearchres" : "Total of %d hits",
 	"_fulltext_search" : "Fulltext search",
 	"_titlestruct_search" : "Search title structure",

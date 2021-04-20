@@ -190,6 +190,7 @@
 	"_like": "wie",
 	"_not_like": "nicht wie",
 	"_exists": "existiert",
+	"_greater_than": "grösser als",
 	"_fulltext_search" : "Volltext-Suche",
 	"_titlestruct_search" : "Suche nach Titelstruktur",
 	"_show_numres" : "Anzahl der Treffer pro Seite",

@@ -146,6 +146,7 @@
 	"_like": "come",
 	"_not_like": "non come",
 	"_exists": "esiste",
+	"_greater_than": "maggiore di",
 	"_fulltext_search" : "Ricerca full-text",
 	"_titlestruct_search" : "Ricerca per struttura del titolo",
 	"_show_numres" : "Numero di visite per pagina",
