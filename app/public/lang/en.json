@@ -192,6 +192,7 @@
 	"_greater_than": "greater than",
 	"_greater_equal_than": "greater equal than",
 	"_less_than": "less than",
+	"_less_equal_than": "less equal than",
 	"_extsearchres" : "Total of %d hits",
 	"_fulltext_search" : "Fulltext search",
 	"_titlestruct_search" : "Search title structure",
