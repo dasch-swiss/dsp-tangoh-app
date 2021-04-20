@@ -184,6 +184,7 @@
 	"_extsearch" : "Advanced search",
 	"_match": "match",
 	"_match_boolean": "match Boolean",
+	"_equal": "equal",
 	"_extsearchres" : "Total of %d hits",
 	"_fulltext_search" : "Fulltext search",
 	"_titlestruct_search" : "Search title structure",
