@@ -191,6 +191,7 @@
 	"_exists": "exists",
 	"_greater_than": "greater than",
 	"_greater_equal_than": "greater equal than",
+	"_less_than": "less than",
 	"_extsearchres" : "Total of %d hits",
 	"_fulltext_search" : "Fulltext search",
 	"_titlestruct_search" : "Search title structure",

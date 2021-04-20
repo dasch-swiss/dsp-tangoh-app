@@ -190,6 +190,7 @@
 	"_exists": "existe",
 	"_greater_than": "supérieur à",
 	"_greater_equal_than": "supérieur ou égal à",
+	"_less_than": "inférieur à",
 	"_fulltext_search" : "recherche de texte intégral",
 	"_titlestruct_search" : "Recherche selon structure des titres",
 	"_show_numres" : "Nombre de résultats par page",

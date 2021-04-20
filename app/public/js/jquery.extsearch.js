@@ -256,7 +256,7 @@
 							compop.append($('<option>', {'value': 'EQ', 'title': '='}).append(strings._equal));
 							compop.append($('<option>', {'value': 'GT', 'title': '\u003E'}).append(strings._greater_than));
 							compop.append($('<option>', {'value': 'GT_EQ', 'title': '\u2265'}).append(strings._greater_equal_than));
-							compop.append($('<option>', {'value': 'LT', 'title': 'less than'}).append('&lt;'));
+							compop.append($('<option>', {'value': 'LT', 'title': '\u003C'}).append(strings._less_than));
 							compop.append($('<option>', {'value': 'LT_EQ', 'title': 'less equal than'}).append('&le;'));
 							compop.append($('<option>', {'value': '!EQ', 'title': '\u2260'}).append(strings._not_equal));
 							compop.append($('<option>', {'value': 'EXISTS', 'title': '\u2203'}).append(strings._exists));
@@ -267,7 +267,7 @@
 							compop.append($('<option>', {'value': 'EQ', 'title': '='}).append(strings._equal));
 							compop.append($('<option>', {'value': 'GT', 'title': '\u003E'}).append(strings._greater_than));
 							compop.append($('<option>', {'value': 'GT_EQ', 'title': '\u2265'}).append(strings._greater_equal_than));
-							compop.append($('<option>', {'value': 'LT', 'title': 'less than'}).append('&lt;'));
+							compop.append($('<option>', {'value': 'LT', 'title': '\u003C'}).append(strings._less_than));
 							compop.append($('<option>', {'value': 'LT_EQ', 'title': 'less equal than'}).append('&le;'));
 							compop.append($('<option>', {'value': '!EQ', 'title': '\u2260'}).append(strings._not_equal));
 							compop.append($('<option>', {'value': 'EXISTS', 'title': '\u2203'}).append(strings._exists));
@@ -278,7 +278,7 @@
 							compop.append($('<option>', {'value': 'EQ', 'title': '='}).append(strings._equal));
 							compop.append($('<option>', {'value': 'GT', 'title': '\u003E'}).append(strings._greater_than));
 							compop.append($('<option>', {'value': 'GT_EQ', 'title': '\u2265'}).append(strings._greater_equal_than));
-							compop.append($('<option>', {'value': 'LT', 'title': 'less than'}).append('&lt;'));
+							compop.append($('<option>', {'value': 'LT', 'title': '\u003C'}).append(strings._less_than));
 							compop.append($('<option>', {'value': 'LT_EQ', 'title': 'less equal than'}).append('&le;'));
 							compop.append($('<option>', {'value': '!EQ', 'title': '\u2260'}).append(strings._not_equal));
 							compop.append($('<option>', {'value': 'EXISTS', 'title': '\u2203'}).append(strings._exists));
@@ -289,7 +289,7 @@
 							compop.append($('<option>', {'value': 'EQ', 'title': '='}).append(strings._equal));
 							compop.append($('<option>', {'value': 'GT', 'title': '\u003E'}).append(strings._greater_than));
 							compop.append($('<option>', {'value': 'GT_EQ', 'title': '\u2265'}).append(strings._greater_equal_than));
-							compop.append($('<option>', {'value': 'LT', 'title': 'less than'}).append('&lt;'));
+							compop.append($('<option>', {'value': 'LT', 'title': '\u003C'}).append(strings._less_than));
 							compop.append($('<option>', {'value': 'LT_EQ', 'title': 'less equal than'}).append('&le;'));
 							compop.append($('<option>', {'value': 'EXISTS', 'title': '\u2203'}).append(strings._exists));
 							var tmpele = $('<span>', {name: 'searchval'}).addClass('propval').data('gui_element', 'date').appendTo(valfield);

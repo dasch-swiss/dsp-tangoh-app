@@ -192,6 +192,7 @@
 	"_exists": "existiert",
 	"_greater_than": "grösser als",
 	"_greater_equal_than": "grösser gleich als",
+	"_less_than": "kleiner als",
 	"_fulltext_search" : "Volltext-Suche",
 	"_titlestruct_search" : "Suche nach Titelstruktur",
 	"_show_numres" : "Anzahl der Treffer pro Seite",
