@@ -186,6 +186,7 @@
 	"_match_boolean": "match Boolean",
 	"_equal": "equal",
 	"_not_equal": "not equal",
+	"_like": "like",
 	"_extsearchres" : "Total of %d hits",
 	"_fulltext_search" : "Fulltext search",
 	"_titlestruct_search" : "Search title structure",

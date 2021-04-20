@@ -185,6 +185,7 @@
 	"_match_boolean": "concordance (booléenne)",
 	"_equal": "égal",
 	"_not_equal": "inégal",
+	"_like": "comme",
 	"_fulltext_search" : "recherche de texte intégral",
 	"_titlestruct_search" : "Recherche selon structure des titres",
 	"_show_numres" : "Nombre de résultats par page",
