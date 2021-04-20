@@ -186,6 +186,7 @@
 	"_match": "Übereinstimmung",
 	"_match_boolean": "Übereinstimmung (Boolesche)",
 	"_equal": "gleich",
+	"_not_equal": "nicht gleich",
 	"_fulltext_search" : "Volltext-Suche",
 	"_titlestruct_search" : "Suche nach Titelstruktur",
 	"_show_numres" : "Anzahl der Treffer pro Seite",
