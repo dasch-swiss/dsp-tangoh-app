@@ -242,13 +242,13 @@
 							compop.append($('<option>', {'value': '!EQ', 'title': '\u2260'}).append(strings._not_equal));
 							compop.append($('<option>', {'value': 'LIKE', 'title': '\u2282'}).append(strings._like));
 							compop.append($('<option>', {'value': '!LIKE', 'title': '\u2284'}).append(strings._not_like));
-							compop.append($('<option>', {'value': 'EXISTS', 'title': 'exists'}).append('&exist;'));
+							compop.append($('<option>', {'value': 'EXISTS', 'title': '\u2203'}).append(strings._exists));
 							valfield.append($('<input>', {'type': 'text', name: 'searchval', size: 32, maxlength: 255}).addClass('propval').data('gui_element', 'text'));
 							break;
 						}
 						case VALTYPE_URI: {
 							compop.append($('<option>', {'value': 'EQ', 'title': '='}).append(strings._equal));
-							compop.append($('<option>', {'value': 'EXISTS', 'title': 'exists'}).append('&exist;'));
+							compop.append($('<option>', {'value': 'EXISTS', 'title': '\u2203'}).append(strings._exists));
 							valfield.append($('<input>', {'type': 'text', name: 'searchval', size: 32, maxlength: 255}).addClass('propval').data('gui_element', 'text'));
 							break;
 						}
@@ -259,7 +259,7 @@
 							compop.append($('<option>', {'value': 'LT', 'title': 'less than'}).append('&lt;'));
 							compop.append($('<option>', {'value': 'LT_EQ', 'title': 'less equal than'}).append('&le;'));
 							compop.append($('<option>', {'value': '!EQ', 'title': '\u2260'}).append(strings._not_equal));
-							compop.append($('<option>', {'value': 'EXISTS', 'title': 'exists'}).append('&exist;'));
+							compop.append($('<option>', {'value': 'EXISTS', 'title': '\u2203'}).append(strings._exists));
 							valfield.append($('<input>', {'type': 'text', name: 'searchval', size: 8, maxlength: 16}).addClass('propval').data('gui_element', 'text'));
 							break;
 						}
@@ -270,7 +270,7 @@
 							compop.append($('<option>', {'value': 'LT', 'title': 'less than'}).append('&lt;'));
 							compop.append($('<option>', {'value': 'LT_EQ', 'title': 'less equal than'}).append('&le;'));
 							compop.append($('<option>', {'value': '!EQ', 'title': '\u2260'}).append(strings._not_equal));
-							compop.append($('<option>', {'value': 'EXISTS', 'title': 'exists'}).append('&exist;'));
+							compop.append($('<option>', {'value': 'EXISTS', 'title': '\u2203'}).append(strings._exists));
 							valfield.append($('<input>', {'type': 'text', name: 'searchval', size: 16, maxlength: 32}).addClass('propval').data('gui_element', 'text'));
 							break;
 						}
@@ -281,7 +281,7 @@
 							compop.append($('<option>', {'value': 'LT', 'title': 'less than'}).append('&lt;'));
 							compop.append($('<option>', {'value': 'LT_EQ', 'title': 'less equal than'}).append('&le;'));
 							compop.append($('<option>', {'value': '!EQ', 'title': '\u2260'}).append(strings._not_equal));
-							compop.append($('<option>', {'value': 'EXISTS', 'title': 'exists'}).append('&exist;'));
+							compop.append($('<option>', {'value': 'EXISTS', 'title': '\u2203'}).append(strings._exists));
 							valfield.append($('<input>', {'type': 'text', name: 'searchval', size: 16, maxlength: 32}).addClass('propval').data('gui_element', 'text'));
 							break;
 						}
@@ -291,13 +291,13 @@
 							compop.append($('<option>', {'value': 'GT_EQ', 'title': 'greater equal than'}).append('&ge;'));
 							compop.append($('<option>', {'value': 'LT', 'title': 'less than'}).append('&lt;'));
 							compop.append($('<option>', {'value': 'LT_EQ', 'title': 'less equal than'}).append('&le;'));
-							compop.append($('<option>', {'value': 'EXISTS', 'title': 'exists'}).append('&exist;'));
+							compop.append($('<option>', {'value': 'EXISTS', 'title': '\u2203'}).append(strings._exists));
 							var tmpele = $('<span>', {name: 'searchval'}).addClass('propval').data('gui_element', 'date').appendTo(valfield);
 							tmpele.dateobj('edit');
 							break;
 						}
 						case VALTYPE_PERIOD: {
-							compop.append($('<option>', {'value': 'EXISTS', 'title': 'exists'}).append('&exist;'));
+							compop.append($('<option>', {'value': 'EXISTS', 'title': '\u2203'}).append(strings._exists));
 							compop.append('NOT YET IMPLEMENTED!');
 							break;
 						}
@@ -313,7 +313,7 @@
 								//}
 								//case 6: { // we use gui_element = "searchbox"
 									compop.append($('<option>', {'value': 'EQ', 'title': '='}).append(strings._equal));
-									compop.append($('<option>', {'value': 'EXISTS', 'title': 'Exists'}).append('&exist;'));
+									compop.append($('<option>', {'value': 'EXISTS', '\u2203': 'Exists'}).append(strings._exists));
 									//
 									// first we determine if we are able to restrict the selection to a certain resource type,
 									// and the number of properties to show
@@ -388,25 +388,25 @@
 							break;
 						}*/
 						case VALTYPE_INTERVAL: {
-							compop.append($('<option>', {'value': 'EXISTS', 'title': 'exists'}).append('&exist;'));
+							compop.append($('<option>', {'value': 'EXISTS', 'title': '\u2203'}).append(strings._exists));
 							compop.append('NOT YET IMPLEMENTED!');
 							break;
 						}
 						case VALTYPE_GEOMETRY: {
-							compop.append($('<option>', {'value': 'EXISTS', 'title': 'exists'}).append('&exist;'));
+							compop.append($('<option>', {'value': 'EXISTS', 'title': '\u2203'}).append(strings._exists));
 							compop.append('NOT YET IMPLEMENTED!');
 							break;
 						}
 						case VALTYPE_COLOR: { // we use gui_element = "colorpicker"
 							compop.append($('<option>', {'value': 'EQ', 'title': '='}).append(strings._equal));
-							compop.append($('<option>', {'value': 'EXISTS', 'title': 'Exists'}).append('&exist;'));
+							compop.append($('<option>', {'value': 'EXISTS', 'title': '\u2203'}).append(strings._exists));
 							var tmpele = $('<span>', {name: 'searchval'}).addClass('propval').data('gui_element', 'colorpicker').appendTo(valfield);
 							tmpele.colorpicker('edit');
 							break;
 						}
 						case VALTYPE_HLIST: { // we use gui_element = "hlist"
 							compop.append($('<option>', {'value': 'EQ', 'title': '='}).append(strings._equal));
-							compop.append($('<option>', {'value': 'EXISTS', 'title': 'Exists'}).append('&exist;'));
+							compop.append($('<option>', {'value': 'EXISTS', 'title': '\u2203'}).append(strings._exists));
 
 							var hlist_id;
 							var attrs = properties[prop_id].attributes; // "hlist=<http://rdfh.ch/lists/73d0ec0302>" -> hlist's root node
@@ -428,7 +428,7 @@
 						}
 						case VALTYPE_GEONAME: { // we use gui_element = "geoname"
 							compop.append($('<option>', {'value': 'EQ', 'title': '='}).append(strings._equal));
-							compop.append($('<option>', {'value': 'EXISTS', 'title': 'Exists'}).append('&exist;'));
+							compop.append($('<option>', {'value': 'EXISTS', 'title': '\u2203'}).append(strings._exists));
 
 							var selection_id;
 							$('<span>', {name: 'searchval'})
@@ -441,7 +441,7 @@
 						case VALTYPE_ICONCLASS: {
 							compop.append($('<option>', {'value': 'EQ', 'title': '='}).append(strings._equal));
 							compop.append($('<option>', {'value': 'LIKE', 'title': '\u2282'}).append(strings._like));
-							compop.append($('<option>', {'value': 'EXISTS', 'title': 'exists'}).append('&exist;'));
+							compop.append($('<option>', {'value': 'EXISTS', 'title': '\u2203'}).append(strings._exists));
 							break;
 						}
 						case VALTYPE_BOOLEAN: {
