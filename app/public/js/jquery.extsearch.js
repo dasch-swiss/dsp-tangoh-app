@@ -255,7 +255,7 @@
 						case VALTYPE_INTEGER: { // we use gui_element = "text"
 							compop.append($('<option>', {'value': 'EQ', 'title': '='}).append(strings._equal));
 							compop.append($('<option>', {'value': 'GT', 'title': '\u003E'}).append(strings._greater_than));
-							compop.append($('<option>', {'value': 'GT_EQ', 'title': 'greater equal than'}).append('&ge;'));
+							compop.append($('<option>', {'value': 'GT_EQ', 'title': '\u2265'}).append(strings._greater_equal_than));
 							compop.append($('<option>', {'value': 'LT', 'title': 'less than'}).append('&lt;'));
 							compop.append($('<option>', {'value': 'LT_EQ', 'title': 'less equal than'}).append('&le;'));
 							compop.append($('<option>', {'value': '!EQ', 'title': '\u2260'}).append(strings._not_equal));
@@ -266,7 +266,7 @@
 						case VALTYPE_FLOAT: { // we use gui_element = "text"
 							compop.append($('<option>', {'value': 'EQ', 'title': '='}).append(strings._equal));
 							compop.append($('<option>', {'value': 'GT', 'title': '\u003E'}).append(strings._greater_than));
-							compop.append($('<option>', {'value': 'GT_EQ', 'title': 'greater equal than'}).append('&ge;'));
+							compop.append($('<option>', {'value': 'GT_EQ', 'title': '\u2265'}).append(strings._greater_equal_than));
 							compop.append($('<option>', {'value': 'LT', 'title': 'less than'}).append('&lt;'));
 							compop.append($('<option>', {'value': 'LT_EQ', 'title': 'less equal than'}).append('&le;'));
 							compop.append($('<option>', {'value': '!EQ', 'title': '\u2260'}).append(strings._not_equal));
@@ -277,7 +277,7 @@
 						case VALTYPE_TIME: { // we use gui_element = "text"
 							compop.append($('<option>', {'value': 'EQ', 'title': '='}).append(strings._equal));
 							compop.append($('<option>', {'value': 'GT', 'title': '\u003E'}).append(strings._greater_than));
-							compop.append($('<option>', {'value': 'GT_EQ', 'title': 'greater equal than'}).append('&ge;'));
+							compop.append($('<option>', {'value': 'GT_EQ', 'title': '\u2265'}).append(strings._greater_equal_than));
 							compop.append($('<option>', {'value': 'LT', 'title': 'less than'}).append('&lt;'));
 							compop.append($('<option>', {'value': 'LT_EQ', 'title': 'less equal than'}).append('&le;'));
 							compop.append($('<option>', {'value': '!EQ', 'title': '\u2260'}).append(strings._not_equal));
@@ -288,7 +288,7 @@
 						case VALTYPE_DATE: { // we use gui_element = "date"
 							compop.append($('<option>', {'value': 'EQ', 'title': '='}).append(strings._equal));
 							compop.append($('<option>', {'value': 'GT', 'title': '\u003E'}).append(strings._greater_than));
-							compop.append($('<option>', {'value': 'GT_EQ', 'title': 'greater equal than'}).append('&ge;'));
+							compop.append($('<option>', {'value': 'GT_EQ', 'title': '\u2265'}).append(strings._greater_equal_than));
 							compop.append($('<option>', {'value': 'LT', 'title': 'less than'}).append('&lt;'));
 							compop.append($('<option>', {'value': 'LT_EQ', 'title': 'less equal than'}).append('&le;'));
 							compop.append($('<option>', {'value': 'EXISTS', 'title': '\u2203'}).append(strings._exists));
