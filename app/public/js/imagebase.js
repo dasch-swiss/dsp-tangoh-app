@@ -48,21 +48,16 @@ $(function() {
 			propedit.append(arkdiv);
 			SALSAH.ApiGet('resourcesv2', resource.resdata.res_id, {resinfo: true, reqtype: 'context'}, function(datav2) {
 				if (datav2['knora-api:versionArkUrl'] && datav2['knora-api:versionArkUrl']['@value']) {
-					arkdiv.append(
-								$('<em>')
-									.addClass('propedit label')
-									.append('Persistent ID (')
-									.append(
-										$('<a>').attr({href: 'https://en.wikipedia.org/wiki/Archival_Resource_Key'}).append('ARK'))
-									.append('): ')
-							.append($('<img>').attr({src: SITE_URL + '/app/icons/16x16/attachment.png', title: 'Copy to clipboard'}).on('click', function() {
-								$(this).next('.clipit').select();
-								document.execCommand('copy');
-							})
-							.dragndrop('makeDraggable', 'HANDLE_ID', {handle_id: datav2['knora-api:versionArkUrl']['@value']}))
-							.append($('<input>')
-								.attr({type:'text', readOnly: true, size: '64'})
-								.addClass('clipit').val(datav2['knora-api:versionArkUrl']['@value'])));
+					arkdiv.clipurl({
+						site_url: SITE_URL,
+						url: datav2['knora-api:versionArkUrl']['@value'],
+						label: 'Persistent ID',
+						spec: {
+							url: 'https://en.wikipedia.org/wiki/Archival_Resource_Key',
+							label: '(ARK)'
+						},
+						draggable: true
+					});
 				}
 			});
 

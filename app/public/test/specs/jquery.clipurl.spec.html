@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Test Suite</title>
+<link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.15.0.css">
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="../../js/jquery.clipurl.js"></script>
+<script src="https://code.jquery.com/qunit/qunit-2.15.0.js"></script>
+
+<script>
+    QUnit.config.requireExpects = true;
+
+    var makeDraggable, handle_arg, url_arg;
+
+    // mock drandrop plugin
+    $.fn.dragndrop = function(method, handle, url) {
+        if (method === 'makeDraggable') {
+            makeDraggable = true;
+            handle_arg = handle;
+            url_arg = url;
+        }
+    }
+
+    // hack for dragndrop plugin
+    window.SITE_URL = 'http://0.0.0.0:3335/';
+
+    // will be mutated when text is copied to clipboard
+    var copied = false;
+
+    // mock copy to clipboard method
+    document.execCommand = function(arg) {
+
+        if (arg === 'copy') {
+            // method was called with the expected arg
+            copied = true;
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+<script>
+
+    QUnit.module('clipurl plugin', {
+        afterEach: function() {
+            $('#qunit-fixture').removeData();
+        }
+    });
+
+    QUnit.test('Basic requirements', function(assert) {
+        assert.expect(2);
+
+        assert.ok($, 'jQuery is loaded');
+        assert.ok($.fn.clipurl, 'The plugin is loaded correctly');
+    });
+
+    QUnit.test('Wrong method call', function(assert) {
+        assert.expect(1);
+        var $fixture = $('#qunit-fixture');
+
+        assert.throws(function() {
+            $fixture.clipurl('no method');
+        }, /Method .*? does not exist/, 'Call an undefined method');
+    });
+
+    QUnit.test('Initialization with options', function(assert) {
+        assert.expect(11);
+
+        var $fixture = $('#qunit-fixture');
+        var $fixtureInitialized = $fixture.clipurl(
+            {
+                site_url: 'http://www.salsah.org',
+                url: 'https://www.google.ch',
+                label: 'cool link',
+                spec: {
+                    label: 'myspec',
+                    url: 'http://www.myspec.org'
+                }
+            }
+        );
+
+        assert.ok($fixtureInitialized, 'Menu initialized');
+
+        assert.equal($fixture.data('localdata').settings.url, 'https://www.google.ch');
+        assert.equal($fixture.data('localdata').settings.label, 'cool link');
+        assert.equal($fixture.data('localdata').settings.site_url, 'http://www.salsah.org');
+        assert.equal($fixture.data('localdata').settings.spec.label, 'myspec');
+        assert.equal($fixture.data('localdata').settings.spec.url, 'http://www.myspec.org');
+
+        var $input = $('input.clipit');
+        assert.equal($($input[0]).val(), 'https://www.google.ch');
+
+        var spec = $('a.spec')[0];
+
+        assert.equal($(spec).text(), 'myspec');
+        assert.equal($(spec).attr('href'), 'http://www.myspec.org');
+
+        assert.strictEqual($fixture.length, $fixtureInitialized.length, 'Keep chainability');
+        assert.strictEqual($fixture, $fixtureInitialized, 'Return the same object');
+
+    });
+
+    QUnit.test('Copy link to clipboard on click event', function(assert) {
+        assert.expect(2);
+
+        var $fixture = $('#qunit-fixture');
+        var $fixtureInitialized = $fixture.clipurl(
+            {
+                site_url: 'http://www.salsah.org',
+                url: 'https://www.google.ch',
+                label: 'cool link',
+            }
+        );
+
+        var $icon = $('img.icon');
+
+        $icon[0].click();
+
+        assert.equal(copied, true);
+        assert.equal(($(document.activeElement).first().val()), 'https://www.google.ch');
+
+    });
+
+    QUnit.test('Activate maekDraggable', function(assert) {
+
+        assert.expect(3);
+
+        var $fixture = $('#qunit-fixture');
+        var $fixtureInitialized = $fixture.clipurl(
+            {
+                site_url: 'http://www.salsah.org',
+                url: 'https://www.google.ch',
+                label: 'cool link',
+                draggable: true
+            }
+        );
+
+        assert.equal(makeDraggable, true);
+        assert.equal(handle_arg, 'HANDLE_ID');
+        assert.propEqual(url_arg, {handle_id: 'https://www.google.ch'});
+
+    });
+
+
+</script>
+
+</body>
