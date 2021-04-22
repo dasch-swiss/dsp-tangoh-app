@@ -28,7 +28,7 @@
 *
 */
 SALSAH.searchlist = function(ele, pele, data, params, searchtype) {
-
+	
 	var defaultresicon = "app/icons/16x16/help.png";
 
 	//
@@ -57,7 +57,6 @@ SALSAH.searchlist = function(ele, pele, data, params, searchtype) {
 					var spliturl,
 						splitval,
 						res_info;
-
 					spliturl = subject.preview_path.split("&");
 					splitval = jQuery.inArray( "qtype=frames", spliturl );
 
@@ -72,7 +71,7 @@ SALSAH.searchlist = function(ele, pele, data, params, searchtype) {
 								info_icon = SITE_URL + '/app/icons/32x32/info.png';
 
 							table.append(
-								item.media = $('<div>').addClass('thumbframe').css({width: parseInt(data.thumb_max.nx) + 10, height: parseInt(data.thumb_max.ny) + 10})
+								item.media = $('<div>').addClass('thumbframe').css({width: 128, height: 128})
 									.flipbook({
 										imglocation: av_frames,
 										duration: av_duration,
@@ -92,7 +91,7 @@ SALSAH.searchlist = function(ele, pele, data, params, searchtype) {
 									)
 							);
 						} else {
-							table.append($('<div>').addClass('thumbframe').css({width: parseInt(data.thumb_max.nx) + 10, height: parseInt(data.thumb_max.ny) + 10})
+							table.append($('<div>').addClass('thumbframe').css({width: 128, height: 128})
 									.append(item.media = $('<img>').attr({src: subject.preview_path}).addClass('thumbnail').css({cursor: 'pointer'}).on('mouseover', function(event){
 										load_infowin(event, subject.obj_id, this);
 									}))
