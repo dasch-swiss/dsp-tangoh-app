@@ -2928,7 +2928,7 @@ $(function() {
 					viewer_settings.pic = context.resinfo.locations;
 					if (viewer_settings.q_index == -1) {
 						for (var i in viewer_settings.pic) {
-							if (Math.max(viewer_settings.pic[i].nx, viewer_settings.pic[i].nx) < viewer_settings.img_maxsize) {
+							if (Math.max(viewer_settings.pic[i].nx, viewer_settings.pic[i].nx) <= viewer_settings.img_maxsize) {
 								viewer_settings.q_index = i;
 							}
 						}
