@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/dasch-swiss/dsp-tangoh-app/compare/v1.1.0...v1.1.1) (2021-04-23)
+
+
+### Bug Fixes
+
+* **grid view:** make preview settings consistent with preview image size (DSP-1548) ([#19](https://www.github.com/dasch-swiss/dsp-tangoh-app/issues/19)) ([ef61a49](https://www.github.com/dasch-swiss/dsp-tangoh-app/commit/ef61a49971166066e3badb411e823159c90753d1))
+
 ## [1.1.0](https://www.github.com/dasch-swiss/dsp-tangoh-app/compare/1.0.1...v1.1.0) (2021-04-22)
 
 
