@@ -512,6 +512,7 @@
 							if (data.status == ApiErrors.OK)
 							{
 								var tmpele;
+								data.vocabularies.sort(SALSAH.sort_by_criterion('longname'));
 								for (var i in data.vocabularies)
 								{
 									if (data.vocabularies[i].active) {
