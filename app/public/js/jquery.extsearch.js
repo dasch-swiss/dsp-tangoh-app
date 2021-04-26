@@ -208,6 +208,17 @@
 							if (data.status == ApiErrors.OK) {
 								var properties_sel = ele.find('select[name=selprop]').empty().append($('<option>', {value: 0}).text('-'));
 								properties = [];
+								data.properties.sort(function(a, b) {
+									var a_lower = a.label ? a.label.toLowerCase() : null;
+									var b_lower = b.label ? b.label.toLowerCase(): null;
+									if (a_lower < b_lower) {
+										return -1;
+									} else if (a_lower > b_lower) {
+										return 1;
+									} else {
+										return 0
+									}
+								});
 								for (var i in data.properties) {
 									properties_sel.append($('<option>').attr({value: data.properties[i].id, title: data.properties[i].longname}).text(data.properties[i].label));
 									properties[data.properties[i].id] = data.properties[i];
