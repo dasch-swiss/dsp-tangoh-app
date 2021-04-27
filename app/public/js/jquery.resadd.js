@@ -116,6 +116,7 @@
 									    data.resourcetypes.splice(region_index, 1);
 									}
 
+									data.resourcetypes.sort(SALSAH.sort_by_criterion('label'));
 									for (i in data.resourcetypes) {
 										restypes_sel.append($('<option>', {
 											value: data.resourcetypes[i].id
@@ -1268,6 +1269,7 @@
 						SALSAH.ApiGet('vocabularies', function(data) {
 							if (data.status == ApiErrors.OK) {
 								var tmpele;
+								data.vocabularies.sort(SALSAH.sort_by_criterion('longname'));
 								for (var i in data.vocabularies) {
 									if (data.vocabularies[i].active) {
 										vocsel.append(tmpele = $('<option>', {
