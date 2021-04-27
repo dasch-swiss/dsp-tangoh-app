@@ -323,3 +323,23 @@ var SALSAH_API_LEGACY = {
 SALSAH.vocabularyId2shortName = function(ontologyid) {
 	return ontologyid.substr(ontologyid.lastIndexOf('/') + 1)
 };
+
+/**
+ * Returns a function to be passed to the Array sort method.
+ *
+ * @param criterion criterion by which the objects contained
+ * in the collection should be sorted, e.g. 'label'.
+ */
+SALSAH.sort_by_criterion = function(criterion) {
+	return function(a, b) {
+		var a_lower = a[criterion] ? a[criterion].toLowerCase() : null;
+		var b_lower = b[criterion] ? b[criterion].toLowerCase() : null;
+		if (a_lower < b_lower) {
+			return -1;
+		} else if (a_lower > b_lower) {
+			return 1;
+		} else {
+			return 0
+		}
+	}
+};

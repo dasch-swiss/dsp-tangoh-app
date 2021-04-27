@@ -182,6 +182,7 @@
 							if (data.status == ApiErrors.OK)
 							{
 								var restypes_sel = $this.find('select[name="selrestype"]').empty().append($('<option>', {value: 0}).text('-'));
+								data.resourcetypes.sort(SALSAH.sort_by_criterion('label'));
 								for (var i in data.resourcetypes) {
 									restypes_sel.append($('<option>', {value: data.resourcetypes[i].id}).text(data.resourcetypes[i].label));
 								}
@@ -208,6 +209,7 @@
 							if (data.status == ApiErrors.OK) {
 								var properties_sel = ele.find('select[name=selprop]').empty().append($('<option>', {value: 0}).text('-'));
 								properties = [];
+								data.properties.sort(SALSAH.sort_by_criterion('label'));
 								for (var i in data.properties) {
 									properties_sel.append($('<option>').attr({value: data.properties[i].id, title: data.properties[i].longname}).text(data.properties[i].label));
 									properties[data.properties[i].id] = data.properties[i];
@@ -510,6 +512,7 @@
 							if (data.status == ApiErrors.OK)
 							{
 								var tmpele;
+								data.vocabularies.sort(SALSAH.sort_by_criterion('longname'));
 								for (var i in data.vocabularies)
 								{
 									if (data.vocabularies[i].active) {
