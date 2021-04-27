@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/dasch-swiss/dsp-tangoh-app/compare/v1.1.0...v1.2.0) (2021-04-27)
+
+
+### Bug Fixes
+
+* **grid view:** make preview settings consistent with preview image size (DSP-1548) ([#19](https://www.github.com/dasch-swiss/dsp-tangoh-app/issues/19)) ([ef61a49](https://www.github.com/dasch-swiss/dsp-tangoh-app/commit/ef61a49971166066e3badb411e823159c90753d1))
+* **link obj:** fix active project when creating a linkage object ([#26](https://www.github.com/dasch-swiss/dsp-tangoh-app/issues/26)) ([f6038a1](https://www.github.com/dasch-swiss/dsp-tangoh-app/commit/f6038a13cbff519cf2c8a9f0ac40aa342dd78320))
+
+
+### Enhancements
+
+* **ext search:** sort props alphabetically (DSP-1572) ([#25](https://www.github.com/dasch-swiss/dsp-tangoh-app/issues/25)) ([5c4a839](https://www.github.com/dasch-swiss/dsp-tangoh-app/commit/5c4a839184afc43616aa62b1f26fb348d267427b))
+* **value container:** add some margin between values ([#22](https://www.github.com/dasch-swiss/dsp-tangoh-app/issues/22)) ([9a11732](https://www.github.com/dasch-swiss/dsp-tangoh-app/commit/9a117327c0ef7a1d73c2589d770bae91cb36f39c))
+
 ## [1.1.0](https://www.github.com/dasch-swiss/dsp-tangoh-app/compare/1.0.1...v1.1.0) (2021-04-22)
 
 
