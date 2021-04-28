@@ -29,7 +29,7 @@
 */
 SALSAH.searchlist = function(ele, pele, data, params, searchtype) {
 
-	var defaultresicon = "app/icons/16x16/help.png";
+	var defaultresicon = "app/icons/16x16/artwork.png";
 
 	//
 	// Create the paging
