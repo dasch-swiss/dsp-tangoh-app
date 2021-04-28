@@ -20,7 +20,7 @@
 
 $(function() {
 
-	var defaultresicon = "app/icons/16x16/help.png"
+	var defaultresicon = "app/icons/16x16/artwork.png"
 
 	//var metadataAreaDomCreate = function(topele, winid, tabid, regnum, resource)
 	var metadataAreaDomCreate = function(topele, resource, options)
