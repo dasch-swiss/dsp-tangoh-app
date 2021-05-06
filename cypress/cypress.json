@@ -1,7 +1,7 @@
 {
   "baseUrl": "http://0.0.0.0:3335",
   "chromeWebSecurity": false,
-  "integrationFolder": "e2e/integration",
+  "integrationFolder": "cypress/integration",
   "testFiles": "*.spec.ts",
   "defaultCommandTimeout": 10000
 }

@@ -58,4 +58,5 @@ dependencies.txt
 /db_staging_dump.trig
 
 node_modules
-cypress/*
+cypress/fixtures/*
+cypress/plugins/*
