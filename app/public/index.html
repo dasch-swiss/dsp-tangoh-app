@@ -457,6 +457,12 @@
 	
 	<div id="ecatcher" class="workwin_eventcatcher event_catcher"></div>
 	
-	<div class="workwin_footer"><span>DaSCH Service Platform VRE V1.0.0 © DaSCH - Data and Service Center for the Humanities || Universität Basel || Université de Lausanne</span></div>
+	<div class="workwin_footer"><p>DaSCH Service Platform | DMP v<span id="app-version"></span> &copy; DaSCH &mdash; Data and Service Center for the Humanities || Universität Basel || Université de Lausanne</p></div>
 </body>
 </html>
+
+<script>
+	$.get("app/version.txt",function(version){
+		document.getElementById("app-version").innerHTML = version;
+	})
+</script>
