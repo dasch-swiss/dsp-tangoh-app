@@ -36,10 +36,12 @@ docs-clean: ## cleans the project directory
 
 .PHONY: build
 build: ## build all targets (excluding docs)
+	cp version.txt app/public/app/
 	@bazel build //...
 
 .PHONY: run
 run: ## run app
+	cp version.txt app/public/app/
 	@bazel run //app
 
 .PHONY: yarn
@@ -56,14 +58,17 @@ cypress-install: yarn ## install dependencies
 
 .PHONY: docker-run
 docker-run: ## run Tangoh docker image locally
+	cp version.txt app/public/app/
 	@bazel run //docker
 
 .PHONY: docker-build
 docker-build: ## build and publish Tangoh docker image locally
+	cp version.txt app/public/app/
 	@bazel run //docker -- --norun
 
 .PHONY: docker-publish
 docker-publish: ## publish Tangoh image to Dockerhub
+	cp version.txt app/public/app/
 	@bazel run //docker:push
 
 #################################
