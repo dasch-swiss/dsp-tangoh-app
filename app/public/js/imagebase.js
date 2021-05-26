@@ -20,7 +20,7 @@
 
 $(function() {
 
-	var defaultresicon = "app/icons/16x16/help.png"
+	var defaultresicon = "app/icons/16x16/artwork.png"
 
 	//var metadataAreaDomCreate = function(topele, winid, tabid, regnum, resource)
 	var metadataAreaDomCreate = function(topele, resource, options)
@@ -1689,11 +1689,10 @@ $(function() {
 				if (resIdsArr.length > 1) {
 					// add the links to the db
 
-
 					SALSAH.ApiPost('resources', { // use resources route because it is a knora-base_linkObject resource that is to be created
 						restype_id: "http://www.knora.org/ontology/knora-base#LinkObj",
 						label: window_content.find(".__label").val(),
-						project_id: SALSAH.active_project,
+						project_id: SALSAH.userprofile.active_project,
 						properties: {
 							"http://www.knora.org/ontology/knora-base#hasLinkTo": resIdsArr,
 							"http://www.knora.org/ontology/knora-base#hasComment": [{richtext_value: rt_props}]

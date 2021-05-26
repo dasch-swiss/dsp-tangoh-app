@@ -1174,6 +1174,9 @@ input.disp_csv {
 .imageBase .transcriptionField .sub {
   vertical-align: sub;
 }
+.value_container {
+  margin-bottom: 10px;
+}
 .imageBase .transcriptionField .red_tc,
 .value_container .red_tc {
   color: red;
