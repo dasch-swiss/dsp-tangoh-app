@@ -16,8 +16,8 @@ http_archive(
 )
 
 # download rules_scala repository
-rules_scala_version="8866f55712b30bbb96335cc11bc5ae5aad5cf8d4" # 18.11.2020
-rules_scala_version_sha256="cdc13aba7f0f89ae52c9c50394a10f24ac0e18923108598ac9dafce5be6a789a"
+rules_scala_version="0ac75d3a044b8e316d1b11b90a7d044685bd72e8" # 22.04.2021
+rules_scala_version_sha256="7624c95c19b60df943dbde90c54d09ecad9aca9432b1211da8352f131776ac36"
 http_archive(
     name = "io_bazel_rules_scala",
     strip_prefix = "rules_scala-%s" % rules_scala_version,
@@ -30,7 +30,7 @@ http_archive(
 # 2.12 is a default version, other versions can be use by passing them explicitly:
 # scala_config(scala_version = "2.11.12")
 load("@io_bazel_rules_scala//:scala_config.bzl", "scala_config")
-scala_config(scala_version = "2.12.11")
+scala_config(scala_version = "2.13.5")
 
 # register default and our custom scala toolchain
 load("@io_bazel_rules_scala//scala:toolchains.bzl", "scala_register_toolchains")
@@ -68,8 +68,8 @@ protobuf_deps()
 #
 http_archive(
     name = "build_bazel_rules_nodejs",
-    sha256 = "dd4dc46066e2ce034cba0c81aa3e862b27e8e8d95871f567359f7a534cccb666",
-    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/3.1.0/rules_nodejs-3.1.0.tar.gz"],
+    sha256 = "4a5d654a4ccd4a4c24eca5d319d85a88a650edf119601550c95bf400c8cc897e",
+    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/3.5.1/rules_nodejs-3.5.1.tar.gz"],
 )
 
 # NOTE: this rule installs nodejs, npm, and yarn, but does NOT install
@@ -125,8 +125,8 @@ java_repositories()
 # download rules_jvm_external used for maven dependency resolution
 # defined in the third_party sub-folder
 #
-rules_jvm_external_version = "3.3" # 7.07.2020
-rules_jvm_external_version_sha256 = "d85951a92c0908c80bd8551002d66cb23c3434409c814179c0ff026b53544dab"
+rules_jvm_external_version = "4.0" # 6.01.2021
+rules_jvm_external_version_sha256 = "31701ad93dbfe544d597dbe62c9a1fdd76d81d8a9150c2bf1ecf928ecdf97169"
 
 http_archive(
     name = "rules_jvm_external",
