@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/dasch-swiss/dsp-tangoh-app/compare/v1.2.0...v1.3.0) (2021-06-02)
+
+
+### Enhancements
+
+* **search:** replace default icon (DSP-1573) ([#27](https://www.github.com/dasch-swiss/dsp-tangoh-app/issues/27)) ([5ed2d85](https://www.github.com/dasch-swiss/dsp-tangoh-app/commit/5ed2d8593c4fb9805263a9830bd1d0c22730401f))
+
+
+### Maintenance
+
+* add google analytics ([#34](https://www.github.com/dasch-swiss/dsp-tangoh-app/issues/34)) ([9b93f13](https://www.github.com/dasch-swiss/dsp-tangoh-app/commit/9b93f131b8d8d18f55a8a7276d5695a6caa0a2a0))
+* **bazel:** bump Bazel to version with apple silicon support ([#29](https://www.github.com/dasch-swiss/dsp-tangoh-app/issues/29)) ([a061445](https://www.github.com/dasch-swiss/dsp-tangoh-app/commit/a06144575b7d0c8995b9680b3516639bc5723eb1))
+* **bazel:** bump versions of rules ([#32](https://www.github.com/dasch-swiss/dsp-tangoh-app/issues/32)) ([ec1948c](https://www.github.com/dasch-swiss/dsp-tangoh-app/commit/ec1948cc1de341bf0de91a3428ac1d235037f026))
+* display version in footer and rename VRE to DMP (DSP-1568) ([#31](https://www.github.com/dasch-swiss/dsp-tangoh-app/issues/31)) ([3852b8a](https://www.github.com/dasch-swiss/dsp-tangoh-app/commit/3852b8a9991e2eeac73f20c35fb24d54dc383241))
+
 ## [1.2.0](https://www.github.com/dasch-swiss/dsp-tangoh-app/compare/v1.1.0...v1.2.0) (2021-04-27)
 
 
