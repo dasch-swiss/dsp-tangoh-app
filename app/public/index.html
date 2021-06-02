@@ -14,7 +14,7 @@
 	<script src="vendor/jQuery/bootstrap.min.js"></script>
 	<script src="vendor/ckeditor-4.7.2-Editor/ckeditor.js" charset="utf-8"></script>
 	<script src="vendor/arbor/arbor.js" charset="utf-8"></script>
-	
+
 	<script src="js/00_init_javascript.js"></script>
 	<script src="js/01_salsah_api.js"></script>
 
@@ -76,6 +76,14 @@
     <script src="js/cola.js"></script>
     <script src="js/cytoscape-cola.js"></script>
     <script src="js/jquery.clipurl.js"></script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-CN60S2F3N4"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-CN60S2F3N4');
+	</script>
 	<script charset="utf-8">
 	/*
 	 * language selection
@@ -141,7 +149,7 @@
 			}
 		}
 	};
-	
+
 	// Called after language data has been loaded below.
 	function init_gui() {
 		var lc = $('#langctrl');
@@ -192,7 +200,7 @@
 		//$('#dologout').simpledialog('logoutbox', {'class': 'loginbox', width: 400, positioning: 'upper'});
 		$('#userctrl').append($('<img>').attr({id: 'dologin', src: 'app/icons/24x24/user.png', title: s_('_login')})
 		.simpledialog('loginbox', {'class': 'loginbox', width: 400, positioning: 'upper', focus: '#user_id'}));
-	
+
 		var json_userprofile;
 		if ((json_userprofile = window.sessionStorage.getItem('userprofile')) != null) {
 			SALSAH.userprofile = JSON.parse(json_userprofile);
@@ -373,7 +381,7 @@
 			}
 		});
 	}
-	
+
 	$(function(){
 		if (SALSAH.userprofile === undefined) SALSAH.userprofile = {};
 		if (SALSAH.userprofile.userData === undefined) SALSAH.userprofile.userData = {};
@@ -396,17 +404,17 @@
 <body>
 	<div class="workwin_header">
 		<div class="workwin_logo"></div>
-		
+
 		<div id="langctrl" class="workwin_header_element">
 		</div>
-		
+
 		<div id="projectctrl" class="workwin_header_element">
 		</div>
-		
+
 		<div id="userctrl" class="workwin_header_element">
 		</div>
-		
-		
+
+
 
 		<div id="loginbox" class="loginbox" style="display: none;">
 			<p id="login_title" class="center"></p>
@@ -450,14 +458,15 @@
 		</div>
 
 	</div>
-	
+
 	<div class="workwin_content">
-		
+
 	</div>
-	
+
 	<div id="ecatcher" class="workwin_eventcatcher event_catcher"></div>
-	
-	<div class="workwin_footer"><p>DaSCH Service Platform | DMP v<span id="app-version"></span> &copy; DaSCH &mdash; Data and Service Center for the Humanities || Universität Basel || Université de Lausanne</p></div>
+
+  <div class="workwin_footer"><p>DaSCH Service Platform | DMP v<span id="app-version"></span> &copy; DaSCH &mdash; Data and Service Center for the Humanities || Universität Basel || Université de Lausanne</p></div>
+
 </body>
 </html>
 
