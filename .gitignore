@@ -59,3 +59,4 @@ dependencies.txt
 
 node_modules
 cypress/*
+app/public/app/version.txt

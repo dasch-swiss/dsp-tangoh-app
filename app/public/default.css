@@ -327,7 +327,7 @@ body {
 }
 .workwin_logo {
   position: absolute;
-  background: url("less/images/workwin/dsp-vre-logo-black.png") no-repeat;
+  background: url("less/images/workwin/dsp-dmp-logo-black.png") no-repeat;
   background-size: 150px 38px;
   width: 154px;
   height: 40px;
@@ -345,18 +345,14 @@ body {
   padding-left: 5px;
   padding-right: 5px;
   padding-top: 2px;
-  padding-bottom: 2px;
+  padding-bottom: 7px;
   border-top-style: solid;
   border-top-width: 1px;
   border-top-color: #AAA;
 }
-.workwin_footer span {
-  position: absolute;
-  left: 5px;
-  top: 2px;
-  height: 11px;
+.workwin_footer p, .workwin_footer span {
+  margin: 0;
   font-size: 11px;
-  line-height: 100%;
 }
 .workwin_content,
 .workwin_eventcatcher {
