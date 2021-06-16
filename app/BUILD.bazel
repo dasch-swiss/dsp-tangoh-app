@@ -3,7 +3,6 @@ package(default_visibility = ["//visibility:public"])
 load("@bazel_tools//tools/build_defs/pkg:pkg.bzl", "pkg_tar")
 load("@io_bazel_rules_scala//scala:scala.bzl", "scala_binary", "scala_library")
 
-
 filegroup(
     name = "main_scala",
     srcs = glob([
@@ -20,31 +19,31 @@ filegroup(
 
 pkg_tar(
     name = "public_folder_tar",
-    strip_prefix = './public', # means don't flatten directory structure!
-    package_dir = "public",
     srcs = [
-        ":public_folder"
+        ":public_folder",
     ],
+    package_dir = "public",
+    strip_prefix = "./public",  # means don't flatten directory structure!
 )
 
 scala_binary(
     name = "app",
-    main_class = "org.knora.salsah.Main",
     data = [
         ":public_folder",
     ],
+    main_class = "org.knora.salsah.Main",
     deps = [
-        ":main_library"
+        ":main_library",
     ],
 )
 
 scala_library(
     name = "main_library",
     srcs = [
-        ":main_scala"
+        ":main_scala",
     ],
     resources = [
-        "//app/src/main/resources"
+        "//app/src/main/resources",
     ],
     # unused_dependency_checker_mode = "warn",
     runtime_deps = [
@@ -64,4 +63,3 @@ scala_library(
         "@maven//:org_scala_lang_scala_reflect",
     ],
 )
-
