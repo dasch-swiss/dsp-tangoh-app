@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.3.1](https://www.github.com/dasch-swiss/dsp-tangoh-app/compare/v1.3.0...v1.3.1) (2021-06-16)
+
+
+### Maintenance
+
+* **analytics:** add Fathom and remove GA4 ([#35](https://www.github.com/dasch-swiss/dsp-tangoh-app/issues/35)) ([e264eb9](https://www.github.com/dasch-swiss/dsp-tangoh-app/commit/e264eb92a2f104e6a88a76495d25ca17a5153dc4))
+* **build:** bump build rules and cleanup build files ([0af4434](https://www.github.com/dasch-swiss/dsp-tangoh-app/commit/0af4434e4e5eaef66765e3160a23354099a0b9f4))
+
 ## [1.3.0](https://www.github.com/dasch-swiss/dsp-tangoh-app/compare/v1.2.0...v1.3.0) (2021-06-02)
 
 
