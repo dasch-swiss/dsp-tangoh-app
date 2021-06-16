@@ -52,6 +52,10 @@ yarn: ## install dependencies
 cypress-install: yarn ## install dependencies
 	@bazel run @npm//cypress/cypress:bin -- install
 
+.PHONY: buildifier
+buildifier: ## format Bazel WORKSPACE and BUILD.bazel files
+	@bazel run :buildifier
+
 #################################
 # Docker targets
 #################################

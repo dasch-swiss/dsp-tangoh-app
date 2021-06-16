@@ -7,36 +7,40 @@ load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 container_image(
     name = "docker",
     base = "@openjdk11//image",
-    cmd = ["java", "-jar", "/app/app_deploy.jar"],
-    legacy_run_behavior = False,
+    cmd = [
+        "java",
+        "-jar",
+        "/app/app_deploy.jar",
+    ],
+    directory = "app",
     docker_run_flags = "--rm -p 3335:3335",
     env = {
         "LANG": "en_US.UTF-8",
         "JAVA_OPTS": "-Dsun.jnu.encoding=UTF-8 -Dfile.encoding=UTF-8 -Dconfig.file=salsah.conf",
     },
-    directory = "app",
     files = [
         "//app:app_deploy.jar",
-    ],
-    tars = [
-        "//app:public_folder_tar"
     ],
     labels = {
         "MAINTAINER": "400790+subotic@users.noreply.github.com",
     },
+    legacy_run_behavior = False,
     ports = [
         "3335/tcp",
+    ],
+    tars = [
+        "//app:public_folder_tar",
     ],
 )
 
 # push to dockerhub
 container_push(
-   name = "push",
-   image = ":docker",
-   format = "Docker",
-   registry = "index.docker.io",
-   repository = "daschswiss/dsp-tangoh-app",
-   tag = "{BUILD_SCM_TAG}"
+    name = "push",
+    format = "Docker",
+    image = ":docker",
+    registry = "index.docker.io",
+    repository = "daschswiss/dsp-tangoh-app",
+    tag = "{BUILD_SCM_TAG}",
 )
 
 # use in targets needing an up-to-date docker image locally
@@ -47,11 +51,10 @@ container_push(
 #  outs = ["build-output.txt"]
 #)
 
-
 # for documentation of yaml, please see https://github.com/GoogleContainerTools/container-structure-test
 container_test(
     name = "image_test",
+    size = "small",
     configs = ["test_app_image_config.yaml"],
     image = ":docker",
-    size="small"
 )

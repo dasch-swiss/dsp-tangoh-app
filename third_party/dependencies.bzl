@@ -3,7 +3,7 @@
 # docs for rules_jvm_external: https://github.com/bazelbuild/rules_jvm_external
 load("@rules_jvm_external//:defs.bzl", "maven_install")
 load("@rules_jvm_external//:specs.bzl", "maven")
-load("//third_party:versions.bzl", "AKKA_VERSION", "AKKA_HTTP_VERSION", "JENA_VERSION")
+load("//third_party:versions.bzl", "AKKA_HTTP_VERSION", "AKKA_VERSION", "JENA_VERSION")
 
 def dependencies():
     #
@@ -34,8 +34,8 @@ def dependencies():
                 artifact = "jena-text",
                 version = JENA_VERSION,
                 exclusions = [
-                    "org.slf4j:slf4j-log4j12"
-                ]
+                    "org.slf4j:slf4j-log4j12",
+                ],
             ),
 
             # Logging
@@ -48,8 +48,6 @@ def dependencies():
 
             # scala stuff
             "org.scala-lang.modules:scala-xml_2.13:1.2.0",
-
-
         ],
         repositories = [
             "https://repo.maven.apache.org/maven2",
@@ -62,4 +60,3 @@ def dependencies():
             "https://central.maven.org/maven2",
         ],
     )
-

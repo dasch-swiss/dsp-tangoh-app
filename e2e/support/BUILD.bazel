@@ -9,6 +9,6 @@ ts_library(
     tsconfig = "//:tsconfig.json",
     deps = [
         "@npm//@types",
-        "@npm//cypress"
+        "@npm//cypress",
     ],
 )
