@@ -315,7 +315,7 @@
 								//}
 								//case 6: { // we use gui_element = "searchbox"
 									compop.append($('<option>', {'value': 'EQ', 'title': '='}).append(strings._equal));
-									compop.append($('<option>', {'value': 'EXISTS', '\u2203': 'Exists'}).append(strings._exists));
+									compop.append($('<option>', {'value': 'EXISTS', 'exists': 'Exists'}).append(strings._exists));
 									//
 									// first we determine if we are able to restrict the selection to a certain resource type,
 									// and the number of properties to show
