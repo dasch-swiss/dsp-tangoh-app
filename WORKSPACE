@@ -1,10 +1,19 @@
 workspace(
-    name = "io_dasch_dsp_tangoh_app",
+    name = "com_github_dasch_swiss_dsp_tangoh_app",
     managed_directories = {"@npm": ["node_modules"]},
 )
 
-# load http_archive method
+
+# NOTE(IS): Load external dependencies from deps.bzl.
+# Do not put "http_archive" and similar rules into this file. Put them into
+# deps.bzl. This allows using this repository as an external workspace.
+# (though with the caveat that that user needs to repeat the relevant bits of
+#  magic in this file, but at least right versions of external rules are picked).
+load("//:deps.bzl", "tangoh_deps")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file")
+
+tangoh_deps()
+
 
 #####################################
 # Skylib                            #
