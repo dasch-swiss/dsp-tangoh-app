@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.3.2](https://www.github.com/dasch-swiss/dsp-tangoh-app/compare/v1.3.1...v1.3.2) (2021-08-16)
+
+
+### Bug Fixes
+
+* **extended search:** invalid attribute name ([#38](https://www.github.com/dasch-swiss/dsp-tangoh-app/issues/38)) ([4770dd7](https://www.github.com/dasch-swiss/dsp-tangoh-app/commit/4770dd733b5d9c3bc9bb36d3d75430ecaa870b50))
+
 ### [1.3.1](https://www.github.com/dasch-swiss/dsp-tangoh-app/compare/v1.3.0...v1.3.1) (2021-06-16)
 
 
