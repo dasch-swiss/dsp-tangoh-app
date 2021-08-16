@@ -1,0 +1,690 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/dasch-favicon.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.1">
+    
+    
+      
+        <title>What is Knora? - Knora Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.38780c08.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f72e892.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#7e56c2">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../assets/style/theme.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#what-is-knora" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="Knora Documentation" class="md-header-nav__button md-logo" aria-label="Knora Documentation">
+      
+  <img src="../../assets/images/dasch-icon-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Knora Documentation
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              What is Knora?
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+
+  
+
+<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." class="md-tabs__link">
+        Home
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../" class="md-tabs__link md-tabs__link--active">
+          Introduction
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knora Documentation" class="md-nav__button md-logo" aria-label="Knora Documentation">
+      
+  <img src="../../assets/images/dasch-icon-white.svg" alt="logo">
+
+    </a>
+    Knora Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Introduction
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Introduction" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        Introduction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        What is Knora?
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="What is Knora?" class="md-nav__link md-nav__link--active">
+      What is Knora?
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#humanities-focused-data-storage" class="md-nav__link">
+    Humanities-Focused Data Storage
+  </a>
+  
+    <nav class="md-nav" aria-label="Humanities-Focused Data Storage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#calendar-independent-dates" class="md-nav__link">
+    Calendar-Independent Dates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flexible-searchable-text-markup" class="md-nav__link">
+    Flexible, Searchable Text Markup
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#powerful-searches" class="md-nav__link">
+    Powerful Searches
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#access-control" class="md-nav__link">
+    Access Control
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-history" class="md-nav__link">
+    Data History
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-consistency" class="md-nav__link">
+    Data Consistency
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linked-open-data" class="md-nav__link">
+    Linked Open Data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build-your-own-application" class="md-nav__link">
+    Build Your Own Application
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../data-formats/" title="Data Formats in Knora" class="md-nav__link">
+      Data Formats in Knora
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../standoff-rdf/" title="Standoff/RDF Text Markup" class="md-nav__link">
+      Standoff/RDF Text Markup
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../example-project/" title="An Example Project" class="md-nav__link">
+      An Example Project
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#humanities-focused-data-storage" class="md-nav__link">
+    Humanities-Focused Data Storage
+  </a>
+  
+    <nav class="md-nav" aria-label="Humanities-Focused Data Storage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#calendar-independent-dates" class="md-nav__link">
+    Calendar-Independent Dates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flexible-searchable-text-markup" class="md-nav__link">
+    Flexible, Searchable Text Markup
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#powerful-searches" class="md-nav__link">
+    Powerful Searches
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#access-control" class="md-nav__link">
+    Access Control
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-history" class="md-nav__link">
+    Data History
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-consistency" class="md-nav__link">
+    Data Consistency
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linked-open-data" class="md-nav__link">
+    Linked Open Data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build-your-own-application" class="md-nav__link">
+    Build Your Own Application
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <!---
+Copyright © 2015-2021 the contributors (see Contributors.md).
+
+This file is part of Knora.
+
+Knora is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Knora is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public
+License along with Knora.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<h1 id="what-is-knora">What Is Knora?</h1>
+<p>Knora (Knowledge Organization, Representation, and Annotation) is a
+a content management system for the long-term preservation and reuse of
+humanities data. It is designed to accommodate data with a complex internal
+structure, including data that could be stored in relational databases.</p>
+<p>Knora aims to solve key problems in the long-term preservation and reuse
+of humanities data:</p>
+<p>First, traditional archives preserve data, but do not facilitate reuse. Typically,
+only metadata can be searched, not the data itself. You have to first identify
+an information package that might be of interest, then download it, and only
+then can you find out what's really in it. This is time-consuming, and
+makes it impractical to reuse data from many different sources.</p>
+<p>Knora solves this problem by keeping the data alive. You can query all the data
+in a Knora repository, not just the metadata. You can import thousands of databases into
+Knora, and run queries that search through all of them at once.</p>
+<p>Another problem is that researchers use a multitude of different data formats, many of
+which are proprietary and quickly become obsolete. It is not practical to maintain
+all the programs that were used to create and read old data files, or even
+all the operating systems that these programs ran on.</p>
+<p>Instead of preserving all these data formats, Knora supports
+the conversion of all sorts of data to a <a href="../data-formats/">small number of formats</a>
+that are suitable for long-term preservation, and that maintain the data's meaning and
+structure:</p>
+<ul>
+<li>Non-binary data is stored as
+  <a href="http://www.w3.org/TR/2014/NOTE-rdf11-primer-20140624/">RDF</a>, in a dedicated
+  database called a triplestore. RDF is an open, vendor-independent standard
+  that can express any data structure.</li>
+<li>Binary media files (images, audio, and video) are converted to a few specialised
+  archival file formats and stored by <a href="https://github.com/dhlab-basel/Sipi">Sipi</a>,
+  with metadata stored in the triplestore.</li>
+</ul>
+<p>Knora then makes this data available for reuse via its generic, standards-based
+application programming interfaces (APIs). A virtual research environment
+(VRE) can then use these APIs to search, link together, and add to data
+from different research projects in a unified way.</p>
+<h2 id="humanities-focused-data-storage">Humanities-Focused Data Storage</h2>
+<p>Each project creates its own data model (or <em>ontology</em>), describing the types of
+items it wishes to store, using basic data types defined in Knora's
+<a href="../02-knora-ontologies/knora-base.md">base ontology</a>.
+This gives projects the freedom to describe their data in a way that makes
+sense to them, while allowing Knora to support searching and linking across projects.</p>
+<p>Knora has built-in support for data structures that are commonly needed in
+humanities data, and that present unique challenges for any type of database storage.</p>
+<h3 id="calendar-independent-dates">Calendar-Independent Dates</h3>
+<p>In the humanities, a date could be based on any sort of calendar (e.g.
+Gregorian, Julian, Islamic, or Hebrew). Knora stores dates using a calendar-independent,
+astronomical representation, and converts between calendars as needed. This makes
+it possible to search for a date in one calendar, and get search results in other calendars.</p>
+<h3 id="flexible-searchable-text-markup">Flexible, Searchable Text Markup</h3>
+<p>Commonly used text markup systems, such as <a href="http://www.tei-c.org/">TEI/XML</a>,
+have to represent a text as a hierarchy, and therefore have trouble supporting
+overlapping markup. Knora supports <a href="../standoff-rdf/">Standoff/RDF markup</a>: the markup is stored
+as RDF data, separately from the text, allowing for overlapping markup. Knora's RDF-based standoff
+is designed to support the needs of complex digital critical editions. Knora
+can import any XML document (including TEI/XML) for storage as standoff/RDF,
+and can regenerate the original XML document at any time.</p>
+<h2 id="powerful-searches">Powerful Searches</h2>
+<p>Knora's API provides a search language, <a href="../03-apis/api-v2/query-language.md">Gravsearch</a>,
+that is designed to meet the needs of humanities researchers. Gravsearch supports Knora's
+humanites-focused data structures, including calendar-independent dates and standoff markup, as well
+as fast full-text searches. This allows searches to combine text-related criteria with any other
+criteria. For example, you could search for a text that contains a certain word
+and also mentions a person who lived in the same city as another person who is the
+author of a text that mentions an event that occurred during a certain time period.</p>
+<h2 id="access-control">Access Control</h2>
+<p>The RDF standards do not include any concept of permissions. Knora's permission
+system allows project administrators and users to determine who can see or
+modify each item of data. Knora filters search results according to each
+user's permissions.</p>
+<h2 id="data-history">Data History</h2>
+<p>RDF does not have a concept of data history. Knora maintains all previous
+versions of each item of data. Ordinary searches return only the latest version,
+but you can
+<a href="../03-apis/api-v2/reading-and-searching-resources.md#get-a-full-representation-of-a-version-of-a-resource-by-iri">obtain</a>
+and
+<a href="../03-apis/api-v2/permalinks.md">cite</a>
+an item as it was at any point in the past.</p>
+<h2 id="data-consistency">Data Consistency</h2>
+<p>RDF triplestores do not implement a standardised way of ensuring the consistency
+of data in a repository. Knora ensures that all data is consistent, conforms
+the project-specific data models, and meets Knora's minimum requirements
+for interoperability and reusability of data.</p>
+<h2 id="linked-open-data">Linked Open Data</h2>
+<p>Knora supports publishing data online as as <a href="http://linkeddata.org/">Linked Open Data</a>,
+using open standards to allow interoperability between different repositories
+on the web.</p>
+<h2 id="build-your-own-application">Build Your Own Application</h2>
+<p>Knora can be used with a general-purpose, browser-based VRE called
+<a href="https://dhlab-basel.github.io/Salsah/">SALSAH</a>.
+Using the Knora API and <a href="https://github.com/dhlab-basel/Knora-ui">Knora-ui</a>, a set of
+reusable user-interface components, you can also create your own VRE or project-specific
+web site.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../" title="Index" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Index
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../data-formats/" title="Data Formats in Knora" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Data Formats in Knora
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.77e55a48.min.js"></script>
+      <script src="../../assets/javascripts/bundle.aa3f9871.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: ['navigation.tabs'],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
