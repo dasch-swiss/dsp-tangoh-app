@@ -1,7 +1,6 @@
-package(default_visibility = ["//visibility:public"])
-
 load("@io_bazel_rules_docker//container:container.bzl", "container_image", "container_push")
-load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
+
+package(default_visibility = ["//visibility:public"])
 
 # builds the docker image
 container_image(
@@ -50,11 +49,3 @@ container_push(
 #  cmd = "docker load -i $(location //docker/knora-salsah1:image) >$@",
 #  outs = ["build-output.txt"]
 #)
-
-# for documentation of yaml, please see https://github.com/GoogleContainerTools/container-structure-test
-container_test(
-    name = "image_test",
-    size = "small",
-    configs = ["test_app_image_config.yaml"],
-    image = ":docker",
-)

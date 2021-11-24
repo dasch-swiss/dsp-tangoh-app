@@ -63,10 +63,10 @@ container_pull(
 # get openjdk
 container_pull(
     name = "openjdk11",
-    digest = "sha256:0e51b455654bd162c485a6a6b5b120cc82db453d9265cc90f0c4fb5d14e2f62e",
+    digest = "sha256:07a404dc9d910d35d89f8c4ab31016162f820ebfd3ae88d2a10f9d4755b60364", # 5.11.2021
     registry = "docker.io",
-    repository = "adoptopenjdk",
-    tag = "11-jre-hotspot-bionic",
+    repository = "eclipse-temurin",
+    # tag = "11-jre-focal", # Ubuntu 20.04
 )
 
 #####################################
