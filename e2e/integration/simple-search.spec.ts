@@ -11,11 +11,11 @@ describe('Search', () => {
 
         cy.wait('@search')
             .should((res: any) => {
-                expect(res.response?.body.nhits).to.eq('13');
+                expect(res.response?.body.nhits).to.eq('14');
             })
 
         cy.get('.searchresult').find('.results').should(($results: JQuery<HTMLElement>) => {
-            const expectedVal = 'Total of 13 hits';
+            const expectedVal = 'Total of 14 hits';
             expect($results.get(0).innerText).to.eq(expectedVal);
         });
 
@@ -52,7 +52,7 @@ describe('Search', () => {
         cy.wait('@search')
             .should((res: any) => {
                 expect(res.request.url).to.contain('filter_by_project=http%3A%2F%2Frdfh.ch%2Fprojects%2F0001')
-                expect(res.response?.body.nhits).to.eq('4');
+                expect(res.response?.body.nhits).to.eq('5');
             })
 
         // logout

@@ -14,7 +14,7 @@ describe('Resource Editing', () => {
             expect($userInfo.get(0).innerText).to.contain('User : ');
         });
 
-        cy.get('#simplesearch').type('test with markup\n')
+        cy.get('#simplesearch').type('testding\n')
 
         cy.get('.result_row').first().click()
 
