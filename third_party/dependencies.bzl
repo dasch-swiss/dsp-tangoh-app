@@ -39,12 +39,14 @@ def dependencies():
             ),
 
             # Logging
-            "com.typesafe.scala-logging:scala-logging_2.12:3.8.0",
-            "ch.qos.logback:logback-classic:1.2.3",
-            "ch.qos.logback:logback-core:1.2.3",
-            "org.slf4j:log4j-over-slf4j:1.7.29",
-            "org.slf4j:jcl-over-slf4j:1.7.29",
-            "org.slf4j:slf4j-api:1.7.29",
+            "com.typesafe.scala-logging:scala-logging_2.13:3.9.4",
+            "ch.qos.logback:logback-classic:1.2.9",
+            "ch.qos.logback:logback-core:1.2.9",
+            "org.slf4j:log4j-over-slf4j:1.7.32",
+            "org.slf4j:jcl-over-slf4j:1.7.32",
+            "org.slf4j:slf4j-api:1.7.32",
+            "org.apache.logging.log4j:log4j:2.17.0", # needed by apache-jena-libs. explicitly setting latest version (log4shell) to override the one used by jena.
+
 
             # scala stuff
             "org.scala-lang.modules:scala-xml_2.13:1.2.0",
