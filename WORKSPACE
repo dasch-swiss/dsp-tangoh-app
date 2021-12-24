@@ -23,9 +23,9 @@ http_archive(
 # Docker                            #
 #####################################
 
-rules_docker_version = "0.17.0"
+rules_docker_version = "0.20.0" # 12.10.2021
 
-rules_docker_version_sha256 = "59d5b42ac315e7eadffa944e86e90c2990110a1c8075f1cd145f487e999d22b3"
+rules_docker_version_sha256 = "92779d3445e7bdc79b961030b996cb0c91820ade7ffa7edca69273f404b085d5"
 
 http_archive(
     name = "io_bazel_rules_docker",
@@ -63,7 +63,7 @@ container_pull(
 # get openjdk
 container_pull(
     name = "openjdk11",
-    digest = "sha256:07a404dc9d910d35d89f8c4ab31016162f820ebfd3ae88d2a10f9d4755b60364", # 5.11.2021
+    digest = "sha256:14605eb0f24ce726e13c4a85862325083dee3ab13da847b7af20d0df5966c176",  # 29.11.2021
     registry = "docker.io",
     repository = "eclipse-temurin",
     # tag = "11-jre-focal", # Ubuntu 20.04
@@ -73,9 +73,9 @@ container_pull(
 # Scala                             #
 #####################################
 
-rules_scala_version = "2b7edf77c153f3fbb882005e0f199f95bd322880"  # 03.06.2021
+rules_scala_version = "0ac75d3a044b8e316d1b11b90a7d044685bd72e8"  # 03.06.2021
 
-rules_scala_version_sha256 = "95dae4b4cfc9368999d92a82f270dcdc43d4ca2d472658070b8f90a474855b1a"
+rules_scala_version_sha256 = "7624c95c19b60df943dbde90c54d09ecad9aca9432b1211da8352f131776ac36"
 
 http_archive(
     name = "io_bazel_rules_scala",
@@ -90,7 +90,7 @@ http_archive(
 # scala_config(scala_version = "2.11.12")
 load("@io_bazel_rules_scala//:scala_config.bzl", "scala_config")
 
-scala_config(scala_version = "2.13.5")
+scala_config(scala_version = "2.13.7")
 
 # register default and our custom scala toolchain
 load("@io_bazel_rules_scala//scala:toolchains.bzl", "scala_register_toolchains")
@@ -225,10 +225,10 @@ twirl_pinned_maven_install()
 # See https://github.com/bazelbuild/rules_go for the up to date setup instructions.
 http_archive(
     name = "io_bazel_rules_go",
-    sha256 = "d1ffd055969c8f8d431e2d439813e42326961d0942bdf734d2c95dc30c369566",
+    sha256 = "69de5c704a05ff37862f7e0f5534d4f479418afc21806c887db544a316f3cb6b",
     urls = [
-        "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.24.5/rules_go-v0.24.5.tar.gz",
-        "https://github.com/bazelbuild/rules_go/releases/download/v0.24.5/rules_go-v0.24.5.tar.gz",
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.27.0/rules_go-v0.27.0.tar.gz",
+        "https://github.com/bazelbuild/rules_go/releases/download/v0.27.0/rules_go-v0.27.0.tar.gz",
     ],
 )
 
