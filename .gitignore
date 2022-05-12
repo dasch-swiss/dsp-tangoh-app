@@ -50,6 +50,7 @@ bazel-*
 .sbtrc
 
 **/venv
+**/env
 **/__pycache__
 dump.rdb
 /site/
