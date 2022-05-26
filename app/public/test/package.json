@@ -6,7 +6,7 @@
     "test": "grunt qunit:all"
   },
   "devDependencies": {
-    "grunt": "1.3.0",
+    "grunt": "1.5.3",
     "grunt-contrib-qunit": "4.0.0",
     "grunt-contrib-uglify": "5.0.1"
   }
