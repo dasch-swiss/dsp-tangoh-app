@@ -30,7 +30,7 @@
 	my.defaultCountryCode = 'CH';
 	my.defaultLanguage = 'en';
 	my.geoNamesApiServer = 'ws.geonames.net';
-	my.geoNamesProtocol = 'http';
+	my.geoNamesProtocol = 'https';
 
 	my.featureClass = {
 		AdministrativeBoundaryFeatures: 'A',
