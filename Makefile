@@ -31,49 +31,40 @@ docs-clean: ## cleans the project directory
 	@$(MAKE) -C docs docs-clean
 
 #################################
-# Bazel targets
+# General targets
 #################################
 
 .PHONY: build
-build: ## build all targets (excluding docs)
-	cp version.txt app/public/app/
-	@bazel build //...
+build: docker-build ## build all targets (excluding docs)
 
 .PHONY: run
-run: ## run app
-	cp version.txt app/public/app/
-	@bazel run //app
+run: docker-run
 
 .PHONY: yarn
 yarn: ## install dependencies
-	@bazel run @nodejs//:yarn
+	@yarn install
 
 .PHONY: cypress-install
 cypress-install: yarn ## install dependencies
 	@bazel run @npm//cypress/cypress:bin -- install
-
-.PHONY: buildifier
-buildifier: ## format Bazel WORKSPACE and BUILD.bazel files
-	@bazel run :buildifier
 
 #################################
 # Docker targets
 #################################
 
 .PHONY: docker-run
-docker-run: ## run Tangoh docker image locally
-	cp version.txt app/public/app/
-	@bazel run //docker
+docker-run: docker-build ## run Tangoh docker image locally
+	@docker run -p 3335:3335 daschswiss/dsp-tangoh-app:latest
 
 .PHONY: docker-build
 docker-build: ## build and publish Tangoh docker image locally
 	cp version.txt app/public/app/
-	@bazel run //docker -- --norun
+	@sbt "app / Docker / publishLocal"
 
 .PHONY: docker-publish
 docker-publish: ## publish Tangoh image to Dockerhub
 	cp version.txt app/public/app/
-	@bazel run //docker:push
+	@sbt "app / Docker / publish"
 
 #################################
 # Integration test targets
@@ -94,21 +85,13 @@ dsp-stack-run: dsp-stack-clone ## runs the dsp-stack
 ## Test Targets
 #################################
 
-.PHONY: test-docker
-test-docker: yarn ## runs Docker image tests
-	bazel test //docker/...
-
 .PHONY: test-app
 test-app: yarn ## runs all app tests (requires a running dsp-stack).
-	bazel test //e2e/...
-
-.PHONY: test
-test: yarn ## runs all test targets (requires a running dsp-stack).
-	bazel test //...
+	@echo "not implemented"
 
 .PHONY: test-e2e
 test-e2e: yarn dsp-stack-clone dsp-stack-run  ## runs all test targets and starts a dsp-stack.
-	bazel test //...
+	@echo "not implemented"
 
 #################################
 ## Other
