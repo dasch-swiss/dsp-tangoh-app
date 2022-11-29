@@ -12,62 +12,24 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 1
-      - uses: joschi/setup-jdk@v2
+      - uses: actions/setup-java@v3
         with:
-          java-version: '11' # The OpenJDK version to make available on the path
-          architecture: 'x64' # defaults to 'x64'
+          distribution: 'temurin'
+          java-version: '17'
+          cache: sbt
       - name: install requirements
         run: sudo apt-get install ca-certificates-java expect
-      - name: Set up Python 3.9
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
       - name: Set up Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '18'
       - name: Install dependencies
-        run: |
-          npm install --global @bazel/bazelisk
-      - name: Disk Free
-        run: |
-          df -h
-          docker system df
-          docker system prune --all --force --volumes
-          df -h
+        run: make install
       - name: Run tests
-        run: make test-e2e
-      - name: Disk Size
-        run: df -h
-
-  docs:
-    name: Docs Build Test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
-      - name: Set up Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: '14'
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r docs/requirements.txt
-          npm install --global typedoc
-          npm install --global @bazel/bazelisk
-          sudo apt-get install graphviz
-      - name: run docs build
-        run: make docs-build
-
+        run: make test-ci
 
   release-please:
     name: Prepare next release
@@ -85,44 +47,20 @@ jobs:
   # publish only on release
   publish:
     name: Publish (on release only)
-    needs: [
-      test,
-      docs
-    ]
+    needs: test
     runs-on: ubuntu-latest
     if: github.event_name == 'release' && startsWith(github.ref, 'refs/tags')
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 50
-      - uses: joschi/setup-jdk@v2
+      - uses: actions/setup-java@v3
         with:
-          java-version: '11' # The OpenJDK version to make available on the path
-          architecture: 'x64' # defaults to 'x64'
+          distribution: 'temurin'
+          java-version: '17'
+          cache: sbt
       - name: Install requirements
         run: sudo apt-get install ca-certificates-java expect redis-tools unzip
-      - name: Set up Python 3.9
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-      - name: Set up Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: '14'
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r docs/requirements.txt
-          npm install --global @bazel/bazelisk
-      - name: Cache maven artifacts
-        uses: actions/cache@v1
-        with:
-          path: ~/.ivy2
-          key: ${{ runner.OS }}-build-${{ hashFiles('**/KnoraBuild.sbt') }}
-          restore-keys: |
-            ${{ runner.OS }}-build-${{ env.cache-name }}-
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
       - name: Build and publish all images to Dockerhub
         run: |
           echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
@@ -139,34 +77,3 @@ jobs:
         uses: lakto/google-chat-action@main
         with:
           url: ${{ secrets.GOOGLE_CHAT_DSP_RELEASES_WEBHOOK_URL }}
-
-  # deploy documentation only on release
-  deploy-docs:
-    name: Deploy docs (on release only)
-    needs: [
-      docs
-    ]
-    runs-on: ubuntu-latest
-    if: github.event_name == 'release' && startsWith(github.ref, 'refs/tags')
-    steps:
-      - name: Checkout main
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-      - name: Set up Python 3.9
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-      - name: Set up Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: '14'
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r docs/requirements.txt
-          npm install --global @bazel/bazelisk
-      - name: Deploy docs
-        uses: mhausenblas/mkdocs-deploy-gh-pages@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

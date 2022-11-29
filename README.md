@@ -11,33 +11,28 @@ Each developer machine should have the following prerequisites installed:
 * Docker Desktop: https://www.docker.com/products/docker-desktop
 * Homebrew (on macOS): https://brew.sh
 
-#### Java Adoptopenjdk 11
+#### JDK Temurin 17
 
 To install, follow these steps:
 
 ```shell
-brew tap AdoptOpenJDK/openjdk
-brew cask install AdoptOpenJDK/openjdk/adoptopenjdk11
+$ brew tap homebrew/cask-versions
+$ brew install --cask temurin17
 ```
 
 To pin the version of Java, please add this environment variable to you startup script (bashrc, etc.):
 
 ```shell
-export JAVA_HOME=`/usr/libexec/java_home -v 11`
+export JAVA_HOME=`/usr/libexec/java_home -v 17`
 ```
 
-#### Bazel build tools
-
-To install, follow these steps:
+#### Cypress (E2E Tests)
 
 ```shell
-npm install -g @bazel/bazelisk
+$ brew install n # node.js installer
+$ n install lts # installs LTS version of node.js and npm
+$ npm install -G cypress
 ```
-
-This will install [bazelisk](https://github.com/bazelbuild/bazelisk) which is
-a wrapper to the `bazel` binary. It will, when `bazel` is run on the command line,
-automatically install the supported Bazel version, defined in the `.bazelversion`
-file in the root of the `knora-api` repository.
 
 ### For building the documentation
 

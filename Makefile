@@ -40,13 +40,9 @@ build: docker-build ## build all targets (excluding docs)
 .PHONY: run
 run: docker-run
 
-.PHONY: yarn
-yarn: ## install dependencies
-	@yarn install
-
-.PHONY: cypress-install
-cypress-install: yarn ## install dependencies
-	@bazel run @npm//cypress/cypress:bin -- install
+.PHONY: install
+install: ## install dependencies
+	@npm install -G cypress
 
 #################################
 # Docker targets
@@ -85,13 +81,13 @@ dsp-stack-run: dsp-stack-clone ## runs the dsp-stack
 ## Test Targets
 #################################
 
-.PHONY: test-app
-test-app: yarn ## runs all app tests (requires a running dsp-stack).
-	@echo "not implemented"
+.PHONY: test
+test: ## runs all app tests (requires a running dsp-stack and app).
+	@$(npm bin)/cypress run
 
-.PHONY: test-e2e
-test-e2e: yarn dsp-stack-clone dsp-stack-run  ## runs all test targets and starts a dsp-stack.
-	@echo "not implemented"
+.PHONY: test-ci
+test-ci: dsp-stack-clone dsp-stack-run docker-run ## runs all test targets and starts a dsp-stack.
+	@$(npm bin)/cypress run
 
 #################################
 ## Other
