@@ -19,8 +19,8 @@
 
 package org.knora.salsah
 
-import java.io.{ File, PrintWriter }
-import java.nio.file.{ Path, Paths }
+import java.io.{File, PrintWriter}
+import java.nio.file.{Path, Paths}
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
@@ -31,12 +31,12 @@ import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.server.directives.ContentTypeResolver.Default
 import akka.stream.Materializer
 
-import scala.concurrent.{ ExecutionContextExecutor, Future }
+import scala.concurrent.{ExecutionContextExecutor, Future}
 import scala.io.Source
 
 object Main extends App {
-  implicit val system: ActorSystem = ActorSystem("app-system")
-  implicit val materializer: Materializer = Materializer.matFromSystem(system)
+  implicit val system: ActorSystem          = ActorSystem("app-system")
+  implicit val materializer: Materializer   = Materializer.matFromSystem(system)
   implicit val ec: ExecutionContextExecutor = system.dispatcher
 
   /**
@@ -46,14 +46,11 @@ object Main extends App {
 
   val log = akka.event.Logging(system, this.getClass)
 
-  val wherami = System.getProperty("user.dir")
-  println(s"user.dir: $wherami")
+  val userDir = System.getProperty("user.dir")
+  println(s"user.dir: $userDir")
 
-  val publicDir = if (wherami.contains("bazel")) {
-    wherami + "/app/public"
-  } else {
-    "/app/public"
-  }
+  val publicDir = userDir + "/public"
+
   println(s"Public Directory: $publicDir")
 
   val webapiUrl = settings.webapiUrl
@@ -62,7 +59,7 @@ object Main extends App {
   val sipiUrl = settings.sipiUrl
   println(s"sipiUrl: $sipiUrl")
 
-  //create /tmp directory if it does not exist
+  // create /tmp directory if it does not exist
   val tmpDir = new File("./tmp")
   if (!tmpDir.exists()) {
     tmpDir.mkdir()
@@ -70,20 +67,19 @@ object Main extends App {
 
   /* rewriting webapi and sipi url in public/js/00_init_javascript.js */
   val originalFile = new File(s"$publicDir/js/00_init_javascript.js") // Original File
-  val tempFile = new File("./tmp/00_init_javascript.js") // Temporary File
-  val printWriter = new PrintWriter(tempFile)
+  val tempFile     = new File("./tmp/00_init_javascript.js")          // Temporary File
+  val printWriter  = new PrintWriter(tempFile)
 
   val origSource = Source.fromFile(originalFile)("UTF-8")
-  origSource.getLines
-    .map { line =>
-      if (line.contains("http://0.0.0.0:3333")) {
-        s"var API_URL = '$webapiUrl';"
-      } else if (line.contains("http://0.0.0.0:1024")) {
-        s"var SIPI_URL = '$sipiUrl';"
-      } else {
-        line
-      }
+  origSource.getLines.map { line =>
+    if (line.contains("http://0.0.0.0:3333")) {
+      s"var API_URL = '$webapiUrl';"
+    } else if (line.contains("http://0.0.0.0:1024")) {
+      s"var SIPI_URL = '$sipiUrl';"
+    } else {
+      line
     }
+  }
     .foreach(x => printWriter.println(x))
 
   origSource.close()
