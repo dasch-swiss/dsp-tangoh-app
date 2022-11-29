@@ -83,11 +83,11 @@ dsp-stack-run: dsp-stack-clone ## runs the dsp-stack
 
 .PHONY: test
 test: ## runs all app tests (requires a running dsp-stack and app).
-	@$(npm bin)/cypress run
+	@$$(npm bin)/cypress run
 
 .PHONY: test-ci
 test-ci: dsp-stack-clone dsp-stack-run docker-run install ## runs all test targets and starts a dsp-stack.
-	@$(npm bin)/cypress run
+	@$$(npm bin)/cypress run
 
 #################################
 ## Other
