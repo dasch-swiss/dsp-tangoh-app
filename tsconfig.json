@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "es5",
+    "lib": ["es5", "dom"],
+    "types": ["cypress", "node"],
+    "strict": true,
+    "noEmitOnError": true
+  },
+  "exclude": ["bazel-*", "node_modules", "public/build/*"]
+}

@@ -42,7 +42,7 @@ run: docker-run
 
 .PHONY: install
 install: ## install dependencies
-	@npm install -G cypress
+	@npm install
 
 #################################
 # Docker targets
@@ -50,7 +50,7 @@ install: ## install dependencies
 
 .PHONY: docker-run
 docker-run: docker-build ## run Tangoh docker image locally
-	@docker run -p 3335:3335 daschswiss/dsp-tangoh-app:latest
+	@docker run -d -p 3335:3335 daschswiss/dsp-tangoh-app:latest
 
 .PHONY: docker-build
 docker-build: ## build and publish Tangoh docker image locally
@@ -86,7 +86,7 @@ test: ## runs all app tests (requires a running dsp-stack and app).
 	@$(npm bin)/cypress run
 
 .PHONY: test-ci
-test-ci: dsp-stack-clone dsp-stack-run docker-run ## runs all test targets and starts a dsp-stack.
+test-ci: dsp-stack-clone dsp-stack-run docker-run install ## runs all test targets and starts a dsp-stack.
 	@$(npm bin)/cypress run
 
 #################################
