@@ -1,5 +1,14 @@
 # Changelog
 
+### [1.3.3](https://www.github.com/dasch-swiss/dsp-tangoh-app/compare/v1.3.2...v1.3.3) (2023-05-30)
+
+
+### Maintenance
+
+* **deps:** bump lodash from 4.17.20 to 4.17.21 ([#30](https://www.github.com/dasch-swiss/dsp-tangoh-app/issues/30)) ([be9bf96](https://www.github.com/dasch-swiss/dsp-tangoh-app/commit/be9bf964f69f76d169c57c8fddd644486d3a1b7e))
+* **deps:** bump path-parse from 1.0.6 to 1.0.7 in /app/public/test ([#37](https://www.github.com/dasch-swiss/dsp-tangoh-app/issues/37)) ([3f126ad](https://www.github.com/dasch-swiss/dsp-tangoh-app/commit/3f126ad77b2ab114cdf5f2031adb826a8af27422))
+* **docs:** bump documentation dependencies ([#50](https://www.github.com/dasch-swiss/dsp-tangoh-app/issues/50)) ([ec4f672](https://www.github.com/dasch-swiss/dsp-tangoh-app/commit/ec4f672b764949a980f0282d9ed8eb0f6a047d60))
+
 ### [1.3.2](https://www.github.com/dasch-swiss/dsp-tangoh-app/compare/v1.3.1...v1.3.2) (2021-08-16)
 
 
